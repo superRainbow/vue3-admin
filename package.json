@@ -44,7 +44,6 @@
     "sass": "^1.27.0",
     "sass-loader": "^10.0.4",
     "typescript": "~3.9.3",
-    "validate-commit-msg": "^2.14.0",
     "vue-cli-plugin-element": "~1.0.1",
     "vue-cli-plugin-element-plus": "0.0.13",
     "vue-jest": "^5.0.0-0"
@@ -101,8 +100,7 @@
     }
   },
   "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "validate-commit-msg"
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
