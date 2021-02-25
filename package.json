@@ -68,7 +68,8 @@
       "ecmaVersion": 2020
     },
     "rules": {
-      "prettier/prettier": 0
+      "prettier/prettier": 0,
+      "@typescript-eslint/no-explicit-any": "off"
     },
     "overrides": [
       {
