@@ -20,7 +20,6 @@
       </el-form-item>
       <el-button type="primary"
                  class="loginBtn"
-                 :loading="loading"
                  :disabled="isDisabled"
                  @click="onSubmit">Login</el-button>
     </el-form>
@@ -54,10 +53,11 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, onMounted, watch } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
-    const loading = ref(false);
+    const store = useStore();
     const loginFormRef = ref();
     const isDisabled = ref(true);
     const loginForm = reactive({
@@ -89,8 +89,7 @@ export default defineComponent({
       if (isDisabled.value) {
         return;
       } else {
-        loading.value = true;
-        console.log('loginForm', loginForm);
+        store.dispatch('handLogin', { data: loginForm });
       }
     };
 
@@ -98,7 +97,6 @@ export default defineComponent({
       loginFormRef,
       loginForm,
       loginRules,
-      loading,
       isDisabled,
       onSubmit,
     };
