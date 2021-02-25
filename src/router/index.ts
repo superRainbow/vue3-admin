@@ -3,13 +3,18 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: '首頁',
+    name: 'index',
     redirect: '/login'
   },
   {
     path: '/login',
-    name: '登錄',
+    name: 'login',
     component: () => import('@/views/Login.vue')
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/layout/index.vue')
   }
 ];
 
