@@ -1,2 +1,22 @@
 $--font-path: '~element-plus/lib/theme-chalk/fonts';
 $--color-primary: hotpink;
+
+$white: #ffffff;
+$bg-gary: #f0f3f4;
+$text-color: #606266;
+
+$sideBar-width: 200;
+$sideBar-small-width: 65;
+$sideBar-bg: #3a3f51;
+
+$header-height: 60;
+$header-border: #454b61;
+
+$padding-wh: 15px;
+
+$zIndex-header: 999;
+
+%width-height {
+  width: 100%;
+  height: 100%;
+}
