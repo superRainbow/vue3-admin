@@ -1,12 +1,18 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
+  <Dialog />
+  <Loading />
 </template>
 
 <script>
+import Dialog from '@/components/Dialog.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Dialog,
+    Loading,
+  }
 }
 </script>
