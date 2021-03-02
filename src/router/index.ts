@@ -1,20 +1,27 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { isAuthenticated } from '@/utils/validate.ts';
+import Login from '@/views/Login.vue';
+import Layout from '@/layout/index.vue';
+import Home from '@/views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'index',
-    redirect: '/login'
-  },
-  {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login.vue')
+    component: Login
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import('@/layout/index.vue')
+    path: '/',
+    name: 'index',
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: Home
+      }
+    ]
   }
 ];
 
