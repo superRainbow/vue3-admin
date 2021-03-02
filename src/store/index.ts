@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import { ElLoading } from 'element-plus';
-import { setLocalStorage } from '@/utils/localStorage.ts';
+import { setLocalStorage, removeLocalStorage } from '@/utils/localStorage.ts';
 
 import router from '@/router';
 import api from '@/utils/api';
@@ -18,14 +18,16 @@ export default createStore({
     isMenuOpen: true,
     isDialogShow: false,
     dialogConfig: {},
-    sidebarList: []
+    sidebarList: [],
+    token: ''
   },
   getters: {
     isLoading: state => state.isLoading,
     isMenuOpen: state => state.isMenuOpen,
     isDialogShow: state => state.isDialogShow,
     dialogConfig: state => state.dialogConfig,
-    sidebarList: state => state.sidebarList
+    sidebarList: state => state.sidebarList,
+    token: state => state.token
   },
   mutations: {
     UPDATE_LOADING(state, flag) {
@@ -41,6 +43,14 @@ export default createStore({
     SET_SIDEBAR_LIST(state, data) {
       state.sidebarList = data;
       setLocalStorage('sidebarList', data);
+    },
+    SET_TOKEN(state, string) {
+      state.token = string;
+      setLocalStorage('token', string);
+    },
+    DELETE_TOKEN(state) {
+      state.token = '';
+      removeLocalStorage('token');
     }
   },
   actions: {
@@ -54,6 +64,7 @@ export default createStore({
         .post(api.LOGIN, data)
         .then(res => {
           if (res.data.success) {
+            commit('SET_TOKEN', res.data.data.token);
             commit('SET_SIDEBAR_LIST', res.data.data.menu);
             router.push({ name: 'home' });
           } else {
