@@ -4,9 +4,11 @@
     <el-scrollbar>
       <el-menu :default-active="activeMenu"
                class="el-menu-vertical-demo"
-               background-color="#3a3f51"
-               text-color="#b5b6bd"
-               active-text-color="rgb(79, 148, 212)">
+               :background-color="MENU_SETTING.BG"
+               :text-color="MENU_SETTING.TEXT"
+               :active-text-color="MENU_SETTING.ACTIVE_TEXT"
+               :collapse-transition="false"
+               :collapse="!opened">
         <sidebar-item v-for="item in filterSidebarList"
                       :key="item.path"
                       :data="item"
@@ -53,6 +55,7 @@
 import { defineComponent, computed, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
+import { MENU_SETTING } from '@/utils/constants.ts';
 import SidebarItem from '@/layout/SideBarItem.vue';
 
 export default defineComponent({
@@ -63,21 +66,16 @@ export default defineComponent({
     const activeMenu = ref(route.name);
 
     watch(activeMenu, () => {
-      console.log('route.name', route.name);
       activeMenu.value = route.name;
     });
 
     return {
-      opened: true,
+      MENU_SETTING,
       activeMenu,
-      filterSidebarList: computed(() => {
-        console.log(
-          'e',
-          store.getters.sidebarList.filter((item: any) => !item.hidden)
-        );
-
-        return store.getters.sidebarList.filter((item: any) => !item.hidden);
-      }),
+      opened: computed(() => store.getters.isMenuOpen),
+      filterSidebarList: computed(() =>
+        store.getters.sidebarList.filter((item: any) => !item.hidden)
+      ),
     };
   },
 });

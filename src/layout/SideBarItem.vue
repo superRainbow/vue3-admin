@@ -4,7 +4,7 @@
                :to="resolvePath(childItem.path)">
       <el-menu-item :index="resolvePath(childItem.path)">
         <i :class="childItem.meta.icon ? childItem.meta.icon : ''"></i>
-        <span>{{ childItem.meta.title }}</span>
+        <span class="title">{{ childItem.meta.title }}</span>
       </el-menu-item>
     </page-link>
   </template>
@@ -12,7 +12,7 @@
               :index="resolvePath(item.path)">
     <template #title>
       <i :class="item.meta.icon"></i>
-      <span>{{ item.meta.title }}</span>
+      <span class="title">{{ item.meta.title }}</span>
     </template>
     <sidebar-item v-for="child in item.children"
                   :key="child.path"
@@ -23,6 +23,12 @@
 </template>
 
 <style lang="scss">
+.small-style {
+  .title,
+  .el-submenu__icon-arrow {
+    display: none;
+  }
+}
 </style>
 
 <script lang="ts">

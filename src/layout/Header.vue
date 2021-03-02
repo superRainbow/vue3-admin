@@ -22,7 +22,7 @@
   left: 0;
   width: 100%;
   height: var(--header-height) !important;
-  padding: 0;
+  padding: 0 !important;
   background-color: $white;
   z-index: $zIndex-header;
 
