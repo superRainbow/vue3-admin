@@ -1,3 +1,13 @@
 {
-  "pluginsFile": "tests/e2e/plugins/index.js"
+  "projectId": "e2e",
+  "chromeWebSecurity": false,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "tests/e2e/results",
+    "overwrite": false,
+    "html": true,
+    "json": true
+  },
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "video": true
 }
