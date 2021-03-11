@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { isAuthenticated } from '@/utils/validate.ts';
+import { isAuthenticated } from '@/utils/validate';
 import Login from '@/views/Login.vue';
 import Layout from '@/layout/index.vue';
 import Home from '@/views/Home.vue';
