@@ -1,4 +1,4 @@
-import { getLocalStorage } from '@/utils/localStorage.ts';
+import { getLocalStorage } from '@/utils/localStorage';
 
 export function isAbsolutePath(path: string) {
   return /^(https?|tel|mailto)/.test(path);
