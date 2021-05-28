@@ -10,7 +10,7 @@
   --sideBar-width: #{$sideBar-width}px;
   width: calc(100% - var(--sideBar-width));
   margin-left: var(--sideBar-width);
-  padding: 0;
+  padding: $spacing-40 !important;
   transition: all 0.3s;
 
   @at-root .small-style & {
@@ -23,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
 export default defineComponent({
   setup() {
     return {};

@@ -17,8 +17,7 @@
     <sidebar-item v-for="child in item.children"
                   :key="child.path"
                   :data="child"
-                  :url="resolvePath(child.path)">
-    </sidebar-item>
+                  :url="resolvePath(child.path)" />
   </el-submenu>
 </template>
 

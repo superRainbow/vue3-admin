@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import { ElLoading } from 'element-plus';
-import { setLocalStorage, removeLocalStorage } from '@/utils/localStorage.ts';
+import { setLocalStorage, removeLocalStorage } from '@/utils/localStorage';
 
 import router from '@/router';
 import api from '@/utils/api';
@@ -18,6 +18,7 @@ export default createStore({
     isMenuOpen: true,
     isDialogShow: false,
     dialogConfig: {},
+    user: {},
     sidebarList: [],
     token: ''
   },
@@ -26,6 +27,7 @@ export default createStore({
     isMenuOpen: state => state.isMenuOpen,
     isDialogShow: state => state.isDialogShow,
     dialogConfig: state => state.dialogConfig,
+    userData: state => state.user,
     sidebarList: state => state.sidebarList,
     token: state => state.token
   },
@@ -48,6 +50,10 @@ export default createStore({
       state.token = string;
       setLocalStorage('token', string);
     },
+    SET_USER_DATA(state, data) {
+      state.user = data;
+      setLocalStorage('user', data);
+    },
     DELETE_TOKEN(state) {
       state.token = '';
       removeLocalStorage('token');
@@ -66,6 +72,7 @@ export default createStore({
           if (res.data.success) {
             commit('SET_TOKEN', res.data.data.token);
             commit('SET_SIDEBAR_LIST', res.data.data.menu);
+            commit('SET_USER_DATA', res.data.data.user);
             router.push({ name: 'home' });
           } else {
             commit('UPDATE_DIALOG_OPEN', {
@@ -84,8 +91,17 @@ export default createStore({
           commit('UPDATE_LOADING', false);
         });
     },
+    logout({ commit }) {
+      commit('SET_TOKEN', '');
+      commit('SET_SIDEBAR_LIST', []);
+      commit('SET_USER_DATA', {});
+      router.push({ name: 'login' });
+    },
     setSidebarList({ commit }, data) {
       commit('SET_SIDEBAR_LIST', data);
+    },
+    setUserData({ commit }, data) {
+      commit('SET_USER_DATA', data);
     },
     toggleDialog({ commit }, flag) {
       commit('UPDATE_DIALOG_OPEN', { isDialogShow: flag });

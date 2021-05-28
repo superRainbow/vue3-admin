@@ -1,9 +1,5 @@
 import Mock from 'mockjs';
-
-const loginData = {
-  name: 'rainbow',
-  pwd: '1qaz2wsx'
-};
+import { LOGIN_DATA } from '@/utils/constants';
 
 const showErrorMsg = () => {
   return [
@@ -26,69 +22,61 @@ const showSuccessMsg = () => {
       message: 'User logged in successfully',
       data: Mock.mock({
         token: '@id',
-        'menu|3': [
+        user: {
+          roles: ['admin'],
+          avatar: 'https://avatars.githubusercontent.com/u/35356592',
+          name: 'rainbow'
+        },
+        menu: [
+          {
+            hidden: false,
+            path: 'permission',
+            meta: {
+              title: '權限',
+              icon: 'el-icon-lock'
+            },
+            children: [
+              {
+                hidden: false,
+                path: 'role',
+                meta: {
+                  title: '角色權限',
+                  icon: 'el-icon-lock'
+                }
+              },
+              {
+                hidden: false,
+                path: 'page',
+                meta: {
+                  title: '功能權限',
+                  icon: 'el-icon-lock'
+                }
+              }
+            ]
+          },
           {
             hidden: true,
-            path: '@title(1)',
+            path: 'hidden',
             meta: {
-              title: '@ctitle',
+              title: '隱藏',
               icon: 'el-icon-lock'
-            },
-            'children|0-3': [
-              {
-                path: '@title(1)',
-                hidden: '@boolean',
-                meta: {
-                  title: '@ctitle',
-                  icon: 'el-icon-lock'
-                }
-              }
-            ]
+            }
           },
           {
             hidden: false,
-            path: 'https://google.com',
+            path: 'list',
             meta: {
-              title: '@ctitle',
-              icon: 'el-icon-lock'
-            },
-            children: []
+              title: '清單',
+              icon: 'el-icon-s-order'
+            }
           },
           {
             hidden: false,
-            path: '@title(1)',
+            path: 'https://google.com.tw',
             meta: {
-              title: '@ctitle',
-              icon: 'el-icon-lock'
-            },
-            'children|0-1': [
-              {
-                path: '@title(1)',
-                hidden: '@boolean',
-                meta: {
-                  title: '@ctitle',
-                  icon: 'el-icon-lock'
-                }
-              }
-            ]
-          },
-          {
-            hidden: false,
-            path: '@title(1)',
-            meta: {
-              title: '@ctitle',
-              icon: 'el-icon-lock'
-            },
-            'children|1-3': [
-              {
-                path: '@title(1)',
-                hidden: '@boolean',
-                meta: {
-                  title: '@ctitle',
-                  icon: 'el-icon-lock'
-                }
-              }
-            ]
+              title: '外部連結',
+              icon: 'el-icon-link'
+            }
           }
         ]
       })
@@ -107,7 +95,8 @@ const checkLogin = (validData: Array<{}>) => {
 };
 
 const login = (data: object) => {
-  const validData = Mock.valid(loginData, data);
+  const { NAME: name, PASSWORD: pwd } = LOGIN_DATA; // 解構賦值
+  const validData = Mock.valid({ name, pwd }, data);
   return checkLogin(validData);
 };
 

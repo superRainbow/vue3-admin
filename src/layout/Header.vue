@@ -7,7 +7,7 @@
     <section class="function">
       <i :class="opened ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
          @click="toggleOpen()"></i>
-      <nav></nav>
+      <Nav class="nav" />
     </section>
   </el-header>
 </template>
@@ -27,35 +27,49 @@
   z-index: $zIndex-header;
 
   .function {
+    --sideBar-width: #{$sideBar-width}px;
     display: flex;
     align-items: center;
-    padding: $padding-wh;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: calc(100% - var(--sideBar-width));
+    padding: $spacing-15 $spacing-40;
+
+    @at-root .small-style & {
+      --sideBar-width: #{$sideBar-small-width}px;
+    }
 
     .el-icon-s-unfold,
     .el-icon-s-fold {
-      cursor: pointer;
+      @extend %link-pointer;
       font-size: 20px;
+    }
+
+    .nav {
+      position: absolute;
+      right: $spacing-40;
     }
   }
 
   .logo {
     --sideBar-width: #{$sideBar-width}px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     width: var(--sideBar-width) !important;
     height: 100%;
-    padding: $padding-wh;
+    padding: $spacing-15;
     background-color: $sideBar-bg;
     border-bottom: 1px solid $header-border;
     overflow: hidden;
     transition: width 0.3s;
 
     @at-root .small-style & {
-      --sideBar-small-width: #{$sideBar-small-width}px;
-      width: var(--sideBar-small-width) !important;
+      --sideBar-width: #{$sideBar-small-width}px;
     }
 
     img {
+      display: block;
       width: 30px;
       height: auto;
     }
@@ -66,8 +80,10 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
+import Nav from '@/layout/Nav.vue';
 
 export default defineComponent({
+  components: { Nav },
   setup() {
     const store = useStore();
     const toggleOpen = () => {

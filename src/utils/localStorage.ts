@@ -1,7 +1,7 @@
-export function setLocalStorage(setName: string, data: string | []) {
+export function setLocalStorage(setName: string, data: string | object) {
   localStorage.setItem(
     setName,
-    Array.isArray(data) ? JSON.stringify(data) : data
+    typeof data === 'object' ? JSON.stringify(data) : data
   );
 }
 

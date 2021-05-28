@@ -55,7 +55,7 @@
 import { defineComponent, computed, watch, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import { MENU_SETTING } from '@/utils/constants.ts';
+import { MENU_SETTING } from '@/utils/constants';
 import SidebarItem from '@/layout/SideBarItem.vue';
 
 export default defineComponent({
