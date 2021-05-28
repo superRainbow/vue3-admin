@@ -1,6 +1,11 @@
-// https://docs.cypress.io/api/introduction/api.html
+import { LOGIN_DATA } from '@/utils/constants';
 
 describe('Login page', () => {
+  it('not login to home page', () => {
+    cy.visit('/home');
+    cy.url().should('match', /login/);
+  });
+
   it('go Login page', () => {
     cy.visit('/');
     cy.contains('h2', '後台系統');
@@ -17,5 +22,16 @@ describe('Login page', () => {
     cy.get('input[type=text]').clear();
     cy.get('input[type=password]').clear();
     cy.get('.loginBtn').should('be.disabled');
+  });
+
+  it('login redirect to home page', () => {
+    cy.get('input[type=text]')
+      .clear()
+      .type(LOGIN_DATA.NAME);
+    cy.get('input[type=password]')
+      .clear()
+      .type(LOGIN_DATA.PASSWORD);
+    cy.get('.loginBtn').click();
+    cy.url().should('include', '/home');
   });
 });
