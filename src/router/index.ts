@@ -32,10 +32,10 @@ const router = createRouter({
 
 // router 守門員：當非 login 頁面會去檢查是否有 token，沒有就導到登入頁
 router.beforeEach(async (to, from, next) => {
-  if (to.name !== 'login' && !isAuthenticated()) {
-    next({ name: 'login' });
+  if (isAuthenticated()) {
+    to.name === 'login' ? next({ name: 'home' }) : next();
   } else {
-    next();
+    to.name === 'login' ? next() : next({ name: 'login' });
   }
 });
 
