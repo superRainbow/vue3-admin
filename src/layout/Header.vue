@@ -83,16 +83,15 @@ import { useStore } from 'vuex';
 import Nav from '@/layout/Nav.vue';
 
 export default defineComponent({
-  components: { Nav },
+  components: {
+    Nav,
+  },
   setup() {
     const store = useStore();
-    const toggleOpen = () => {
-      store.commit('UPDATE_MENU_OPEN');
-    };
 
     return {
       opened: computed(() => store.getters.isMenuOpen),
-      toggleOpen,
+      toggleOpen: () => store.commit('UPDATE_MENU_OPEN'),
     };
   },
 });

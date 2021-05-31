@@ -57,11 +57,7 @@ export default defineComponent({
     const childItem = ref({});
 
     const hasOnlyChild = (parent: any) => {
-      const newChildren =
-        (parent.children &&
-          parent.children.length > 0 &&
-          parent.children.filter((obj: any) => !obj.hidden)) ||
-        [];
+      const newChildren = (parent.children && parent.children.filter((obj: any) => !obj.hidden)) || [];
       if (newChildren.length === 1 && !parent.meta) {
         childItem.value = newChildren[0];
         console.log('childItem 1', parent.meta, childItem);

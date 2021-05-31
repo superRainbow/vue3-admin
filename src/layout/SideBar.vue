@@ -73,9 +73,7 @@ export default defineComponent({
       MENU_SETTING,
       activeMenu,
       opened: computed(() => store.getters.isMenuOpen),
-      filterSidebarList: computed(() =>
-        store.getters.sidebarList.filter((item: any) => !item.hidden)
-      ),
+      filterSidebarList: computed(() => store.getters.sidebarList.filter((item: any) => !item.hidden)),
     };
   },
 });

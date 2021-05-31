@@ -40,10 +40,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     if (getLocalStorage('sidebarList')) {
-      store.dispatch(
-        'setSidebarList',
-        JSON.parse(getLocalStorage('sidebarList'))
-      );
+      store.dispatch('setSidebarList', JSON.parse(getLocalStorage('sidebarList')));
     }
     if (getLocalStorage('user')) {
       store.dispatch('setUserData', JSON.parse(getLocalStorage('user')));
