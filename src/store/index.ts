@@ -4,7 +4,7 @@ import { ElLoading } from 'element-plus';
 import { setLocalStorage, removeLocalStorage } from '@/utils/localStorage';
 
 import router from '@/router';
-import api from '@/utils/api';
+import API from '@/utils/api';
 
 const errorHandler = ({ response }: any) => {
   const { status, data } = response;
@@ -67,7 +67,7 @@ export default createStore({
     handLogin({ commit }, { data }) {
       commit('UPDATE_LOADING', true);
       axios
-        .post(api.LOGIN, data)
+        .post(API.LOGIN, data)
         .then(res => {
           if (res.data.success) {
             commit('SET_TOKEN', res.data.data.token);

@@ -1,8 +1,7 @@
 const CONTEXT = '/api';
-const LOGIN = `${CONTEXT}/login`;
 
-const api = {
-  LOGIN
+const API = {
+  LOGIN: `${CONTEXT}/login`
 };
 
-export default api;
+export default API;
