@@ -2,7 +2,7 @@
   <el-dialog :title="dialogConfig.title"
              :model-value="isDialogShow"
              :show-close="dialogConfig.showHeaderClose"
-             @close="close"
+             @close="cancel"
              :width="dialogConfig.width">
     <main>
       {{dialogConfig.message || ''}}
@@ -10,9 +10,9 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button v-if="dialogConfig.isCancelShow"
-                   @click="submit">{{dialogConfig.cancelText}}</el-button>
+                   @click="cancel">{{dialogConfig.cancelText}}</el-button>
         <el-button type="primary"
-                   @click="submit">{{dialogConfig.submitText}}</el-button>
+                   @click="confirm">{{dialogConfig.submitText}}</el-button>
       </span>
     </template>
   </el-dialog>
@@ -34,26 +34,30 @@ const defaultConfig = {
   width: '30%',
   showHeaderClose: true,
   isCancelShow: false,
+  confirmCallback: () => {
+    return;
+  },
 };
 
 export default defineComponent({
   setup() {
     const store = useStore();
-    const config = computed(() => store.getters.dialogConfig);
+    const dialogConfig = computed(() => Object.assign(defaultConfig, store.getters.dialogConfig));
 
-    const close = () => {
+    const cancel = () => {
       store.dispatch('toggleDialog', false);
     };
 
-    const submit = () => {
+    const confirm = () => {
       store.dispatch('toggleDialog', false);
+      dialogConfig.value.confirmCallback();
     };
 
     return {
-      dialogConfig: computed(() => Object.assign(defaultConfig, config.value)),
+      dialogConfig,
       isDialogShow: computed(() => store.getters.isDialogShow),
-      close,
-      submit,
+      cancel,
+      confirm,
     };
   },
 });
