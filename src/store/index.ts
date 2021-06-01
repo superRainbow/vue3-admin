@@ -54,9 +54,8 @@ export default createStore({
       state.user = data;
       setLocalStorage('user', data);
     },
-    DELETE_TOKEN(state) {
-      state.token = '';
-      removeLocalStorage('token');
+    SET_DEMO_LIST(state, data) {
+      state.demoList = data;
     }
   },
   actions: {
@@ -64,7 +63,7 @@ export default createStore({
       ElLoading.service({ fullscreen: flag });
       commit('UPDATE_LOADING', flag);
     },
-    handLogin({ commit }, { data }) {
+    handLogin({ commit, dispatch }, { data }) {
       commit('UPDATE_LOADING', true);
       axios
         .post(API.LOGIN, data)
@@ -75,8 +74,8 @@ export default createStore({
             commit('SET_USER_DATA', res.data.data.user);
             router.push({ name: 'home' });
           } else {
-            commit('UPDATE_DIALOG_OPEN', {
-              isDialogShow: true,
+            dispatch('toggleDialog', {
+              flag: true,
               config: {
                 isCancelShow: false,
                 message: res.data.message
@@ -103,8 +102,8 @@ export default createStore({
     setUserData({ commit }, data) {
       commit('SET_USER_DATA', data);
     },
-    toggleDialog({ commit }, flag) {
-      commit('UPDATE_DIALOG_OPEN', { isDialogShow: flag });
+    toggleDialog({ commit }, { flag, config }) {
+      commit('UPDATE_DIALOG_OPEN', { isDialogShow: flag, config });
     }
   },
   modules: {}
