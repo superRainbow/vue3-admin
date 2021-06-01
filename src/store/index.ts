@@ -20,7 +20,8 @@ export default createStore({
     dialogConfig: {},
     user: {},
     sidebarList: [],
-    token: ''
+    token: '',
+    demoList: []
   },
   getters: {
     isLoading: state => state.isLoading,
@@ -29,7 +30,8 @@ export default createStore({
     dialogConfig: state => state.dialogConfig,
     userData: state => state.user,
     sidebarList: state => state.sidebarList,
-    token: state => state.token
+    token: state => state.token,
+    demoList: state => state.demoList
   },
   mutations: {
     UPDATE_LOADING(state, flag) {
@@ -104,6 +106,21 @@ export default createStore({
     },
     toggleDialog({ commit }, { flag, config }) {
       commit('UPDATE_DIALOG_OPEN', { isDialogShow: flag, config });
+    },
+    setDemoList({ commit }, data) {
+      commit('SET_DEMO_LIST', data);
+    },
+    getDemoList({ dispatch }) {
+      axios
+        .get(API.DEMO_LIST)
+        .then(res => {
+          if (res.data.success) {
+            dispatch('setDemoList', res.data.data);
+          }
+        })
+        .catch(error => {
+          errorHandler(error);
+        });
     }
   },
   modules: {}

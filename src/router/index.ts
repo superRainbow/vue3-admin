@@ -3,6 +3,7 @@ import { isAuthenticated } from '@/utils/validate';
 import Login from '@/views/Login.vue';
 import Layout from '@/layout/index.vue';
 import Home from '@/views/Home.vue';
+import List1 from '@/views/List-1.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,6 +21,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'home',
         component: Home
+      },
+      {
+        path: 'list-1',
+        name: 'list-1',
+        component: List1
       }
     ]
   }

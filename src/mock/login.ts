@@ -64,9 +64,9 @@ const showSuccessMsg = () => {
           },
           {
             hidden: false,
-            path: 'list',
+            path: 'list-1',
             meta: {
-              title: '清單',
+              title: '基本 table',
               icon: 'el-icon-s-order'
             }
           },
