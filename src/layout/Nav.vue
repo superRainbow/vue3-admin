@@ -7,7 +7,9 @@
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>個人資料</el-dropdown-item>
+        <page-link to="profile">
+          <el-dropdown-item>個人資料</el-dropdown-item>
+        </page-link>
         <page-link to="https://google.com.tw">
           <el-dropdown-item>外部連結</el-dropdown-item>
         </page-link>

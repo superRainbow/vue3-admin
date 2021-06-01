@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue';
 import Layout from '@/layout/index.vue';
 import Home from '@/views/Home.vue';
 import List1 from '@/views/List-1.vue';
+import Profile from '@/views/Profile.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'home',
         component: Home
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: Profile
       },
       {
         path: 'list-1',
