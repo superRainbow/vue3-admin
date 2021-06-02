@@ -1,7 +1,7 @@
 <template>
   <router-view></router-view>
   <Dialog />
-  <Loading />
+  <Loading name="fullscreen" />
 </template>
 
 <script>

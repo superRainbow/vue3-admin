@@ -15,6 +15,7 @@ const errorHandler = ({ response }: any) => {
 export default createStore({
   state: {
     isLoading: false,
+    loadingTarget: '',
     isMenuOpen: true,
     isDialogShow: false,
     dialogConfig: {},
@@ -25,6 +26,7 @@ export default createStore({
   },
   getters: {
     isLoading: state => state.isLoading,
+    loadingTarget: state => state.loadingTarget,
     isMenuOpen: state => state.isMenuOpen,
     isDialogShow: state => state.isDialogShow,
     dialogConfig: state => state.dialogConfig,
@@ -34,8 +36,9 @@ export default createStore({
     demoList: state => state.demoList
   },
   mutations: {
-    UPDATE_LOADING(state, flag) {
+    UPDATE_LOADING(state, { flag, target = 'content' }) {
       state.isLoading = flag;
+      state.loadingTarget = target;
     },
     UPDATE_MENU_OPEN(state) {
       state.isMenuOpen = !state.isMenuOpen;
@@ -61,12 +64,8 @@ export default createStore({
     }
   },
   actions: {
-    handLoading({ commit }, flag) {
-      ElLoading.service({ fullscreen: flag });
-      commit('UPDATE_LOADING', flag);
-    },
     handLogin({ commit, dispatch }, { data }) {
-      commit('UPDATE_LOADING', true);
+      commit('UPDATE_LOADING', { flag: true, target: 'fullscreen' });
       axios
         .post(API.LOGIN, data)
         .then(res => {
@@ -89,7 +88,7 @@ export default createStore({
           errorHandler(error);
         })
         .finally(() => {
-          commit('UPDATE_LOADING', false);
+          commit('UPDATE_LOADING', { flag: false });
         });
     },
     logout({ commit }) {
@@ -110,7 +109,8 @@ export default createStore({
     setDemoList({ commit }, data) {
       commit('SET_DEMO_LIST', data);
     },
-    getDemoList({ dispatch }) {
+    getDemoList({ commit, dispatch }) {
+      commit('UPDATE_LOADING', { flag: true });
       axios
         .get(API.DEMO_LIST)
         .then(res => {
@@ -120,6 +120,9 @@ export default createStore({
         })
         .catch(error => {
           errorHandler(error);
+        })
+        .finally(() => {
+          commit('UPDATE_LOADING', { flag: false });
         });
     }
   },

@@ -1,6 +1,7 @@
 <template>
   <h1 class="title">基本的 Table</h1>
-  <el-table :data="data"
+  <el-table v-if="data.length > 0"
+            :data="data"
             stripe
             highlight-current-row
             style="width: 100%">

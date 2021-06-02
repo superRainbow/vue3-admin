@@ -1,5 +1,6 @@
 <template>
-  <div v-loading.fullscreen.lock="fullscreenLoading"></div>
+  <div v-loading.fullscreen.lock="isFullscreen && isLoading"
+       v-loading="!isFullscreen && isLoading"></div>
 </template>
 
 <style lang="scss">
@@ -11,11 +12,18 @@ import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
-  setup() {
+  props: {
+    name: {
+      type: String,
+      default: '',
+    },
+  },
+  setup(props) {
     const store = useStore();
 
     return {
-      fullscreenLoading: computed(() => store.getters.isLoading),
+      isFullscreen: computed(() => props.name === 'fullscreen'),
+      isLoading: computed(() => props.name === store.getters.loadingTarget && store.getters.isLoading),
     };
   },
 });
