@@ -22,7 +22,7 @@ const showSuccessMsg = () => {
       message: 'User logged in successfully',
       'data|100': [
         {
-          time: '@datetime',
+          time: '@date',
           name: '@name',
           county: '@county'
         }

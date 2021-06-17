@@ -1,7 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-import { ElLoading } from 'element-plus';
-import { setLocalStorage, removeLocalStorage } from '@/utils/localStorage';
+import { setLocalStorage } from '@/utils/localStorage';
 
 import router from '@/router';
 import API from '@/utils/api';

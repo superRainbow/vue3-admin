@@ -72,6 +72,14 @@ const showSuccessMsg = () => {
           },
           {
             hidden: false,
+            path: 'list-2',
+            meta: {
+              title: '篩選 table',
+              icon: 'el-icon-s-order'
+            }
+          },
+          {
+            hidden: false,
             path: 'https://google.com.tw',
             meta: {
               title: '外部連結',

@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue';
 import Layout from '@/layout/index.vue';
 import Home from '@/views/Home.vue';
 import List1 from '@/views/List-1.vue';
+import List2 from '@/views/List-2.vue';
 import Profile from '@/views/Profile.vue';
 
 const routes: Array<RouteRecordRaw> = [
@@ -32,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'list-1',
         name: 'list-1',
         component: List1
+      },
+      {
+        path: 'list-2',
+        name: 'list-2',
+        component: List2
       }
     ]
   }

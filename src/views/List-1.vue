@@ -2,6 +2,7 @@
   <h1 class="title">基本的 Table</h1>
   <el-table v-if="data.length > 0"
             :data="data"
+            :default-sort="{prop: 'time', order: 'name'}"
             stripe
             highlight-current-row
             style="width: 100%">
@@ -9,6 +10,7 @@
                      :key="colum.name"
                      :prop="colum.prop"
                      :label="colum.label"
+                     :sortable="(colum.prop === 'time' || colum.prop === 'name') ? true : false"
                      :width="colum.width">
     </el-table-column>
     <el-table-column label="功能"
@@ -35,7 +37,7 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, computed, reactive } from 'vue';
+import { defineComponent, onBeforeMount, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
