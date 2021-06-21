@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "serve-mock": "NODE_ENV=mock vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e --headless --mode=development",
+    "test:e2e": "vue-cli-service test:e2e --headless",
     "lint": "vue-cli-service lint",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },

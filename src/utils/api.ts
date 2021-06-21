@@ -1,8 +1,6 @@
-const CONTEXT = '/api';
-
 const API = {
-  LOGIN: `${CONTEXT}/login`,
-  DEMO_LIST: `${CONTEXT}/demo-list`
+  LOGIN: `${process.env.VUE_APP_API_URL}/Auth/Login`,
+  DEMO_LIST: `${process.env.VUE_APP_API_URL}/Auth/demo-list`
 };
 
 export default API;

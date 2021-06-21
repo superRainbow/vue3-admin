@@ -6,7 +6,7 @@ import locale from 'element-plus/lib/locale/lang/zh-tw';
 import App from '@/App.vue';
 import '@/style/index.scss';
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'mock') {
   require('@/mock/index');
 }
 
