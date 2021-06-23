@@ -1,6 +1,6 @@
 
 <template>
-  <el-aside>
+  <aside>
     <el-scrollbar>
       <el-menu :default-active="activeMenu"
                class="el-menu-vertical-demo"
@@ -15,33 +15,22 @@
                       :url="item.path"></sidebar-item>
       </el-menu>
     </el-scrollbar>
-  </el-aside>
+  </aside>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style/variable.scss';
-.el-aside {
-  --header-height: #{$header-height}px;
-  --sideBar-width: #{$sideBar-width}px;
-  width: var(--sideBar-width) !important;
-  height: calc(100% - var(--header-height)) !important;
-  background-color: $sideBar-bg;
+aside {
   position: fixed;
   bottom: 0;
   left: 0;
   overflow: hidden;
-  transition: width 0.3s;
   z-index: 999;
-
-  @at-root .small-style & {
-    --sideBar-small-width: #{$sideBar-small-width}px;
-    width: var(--sideBar-small-width) !important;
-  }
 
   .el-scrollbar {
     height: 100%;
     .el-scrollbar__wrap {
-      overflow-x: hidden !important;
+      overflow-x: hidden;
     }
   }
   .el-menu {

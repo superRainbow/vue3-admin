@@ -1,24 +1,14 @@
 <template>
-  <el-main>
+  <main>
     <router-view />
     <Loading name="content" />
-  </el-main>
+  </main>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style/variable.scss';
-.el-main {
-  --sideBar-width: #{$sideBar-width}px;
-  width: calc(100% - var(--sideBar-width));
-  margin-left: var(--sideBar-width);
-  padding: $spacing-40 !important;
-  transition: all 0.3s;
-
-  @at-root .small-style & {
-    --sideBar-small-width: #{$sideBar-small-width}px;
-    width: calc(100% - var(--sideBar-small-width));
-    margin-left: var(--sideBar-small-width);
-  }
+main {
+  padding: $spacing-40;
 }
 </style>
 

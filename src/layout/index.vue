@@ -8,17 +8,41 @@
   </el-container>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style/variable.scss';
 
 .container {
   @extend %width-height;
   position: relative;
   background-color: $bg-gary;
+}
 
-  .content {
-    --header-height: #{$header-height}px;
-    margin-top: var(--header-height);
+.content {
+  --header-height: #{$header-height}px;
+  --sideBar-width: #{$sideBar-width}px;
+  --sideBar-small-width: #{$sideBar-small-width}px;
+  margin-top: var(--header-height);
+
+  :deep(aside) {
+    width: var(--sideBar-width);
+    height: calc(100% - var(--header-height));
+    background-color: $sideBar-bg;
+    transition: width 0.3s;
+
+    @at-root .small-style & {
+      width: var(--sideBar-small-width);
+    }
+  }
+
+  :deep(main) {
+    width: calc(100% - var(--sideBar-width));
+    margin-left: var(--sideBar-width);
+    transition: all 0.3s;
+
+    @at-root .small-style & {
+      width: calc(100% - var(--sideBar-small-width));
+      margin-left: var(--sideBar-small-width);
+    }
   }
 }
 </style>

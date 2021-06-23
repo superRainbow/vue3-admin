@@ -1,5 +1,5 @@
 <template>
-  <el-header>
+  <header>
     <section class="logo">
       <img src="@/assets/logo.png"
            alt="logo">
@@ -9,20 +9,20 @@
          @click="toggleOpen()"></i>
       <Nav class="nav" />
     </section>
-  </el-header>
+  </header>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style/variable.scss';
-.el-header {
+header {
   --header-height: #{$header-height}px;
   display: flex;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--header-height) !important;
-  padding: 0 !important;
+  height: var(--header-height);
+  padding: 0;
   background-color: $white;
   z-index: $zIndex-header;
 
@@ -56,7 +56,7 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    width: var(--sideBar-width) !important;
+    width: var(--sideBar-width);
     height: 100%;
     padding: $spacing-15;
     background-color: $sideBar-bg;
