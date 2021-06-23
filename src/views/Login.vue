@@ -7,15 +7,17 @@
       <div class="title">
         <h2>後台系統</h2>
       </div>
-      <el-form-item prop="name">
-        <el-input placeholder="請輸入帳號"
+      <el-form-item prop="email">
+        <el-input type="email"
+                  placeholder="請輸入信箱"
                   prefix-icon="el-icon-user"
-                  v-model="loginForm.name"></el-input>
+                  v-model="loginForm.email"></el-input>
       </el-form-item>
-      <el-form-item prop="pwd">
-        <el-input placeholder="請輸入密碼"
+      <el-form-item prop="password">
+        <el-input type="password"
+                  placeholder="請輸入密碼"
                   prefix-icon="el-icon-lock"
-                  v-model="loginForm.pwd"
+                  v-model="loginForm.password"
                   show-password></el-input>
       </el-form-item>
       <el-button type="primary"
@@ -61,22 +63,20 @@ export default defineComponent({
     const loginFormRef = ref();
     const isDisabled = ref(true);
     const loginForm = reactive({
-      name: 'rainbow',
-      pwd: '1qaz2wsx',
+      email: 'rainbow_wu@cht.com.tw',
+      password: '`1QAZ2wsx',
     });
 
     const loginRules = {
-      name: [
-        { required: true, message: '請輸入帳號', trigger: 'blur' },
-        { min: 3, max: 15, message: '長度在3-15之間', trigger: 'blur' },
+      email: [
+        { required: true, message: '請輸入信箱', trigger: 'blur' },
+        { type: 'email', message: '請輸入信箱格式', trigger: ['blur', 'change'] },
       ],
-      pwd: [{ required: true, message: '請輸入密碼', trigger: 'blur' }],
+      password: [{ required: true, message: '請輸入密碼', trigger: 'blur' }],
     };
 
     const formValidate = () => {
-      loginFormRef.value.validate(
-        (valid: boolean) => (isDisabled.value = !valid)
-      );
+      loginFormRef.value.validate((valid: boolean) => (isDisabled.value = !valid));
     };
 
     onMounted(() => {

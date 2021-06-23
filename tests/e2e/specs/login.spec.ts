@@ -12,22 +12,22 @@ describe('Login page', () => {
   });
 
   it('name validate fail show error message', () => {
-    cy.get('input[type=text]')
+    cy.get('input[type=email]')
       .clear()
       .type('11');
-    cy.get('.el-form-item__error').should('have.text', '長度在3-15之間');
+    cy.get('.el-form-item__error').should('have.text', '請輸入信箱格式');
   });
 
   it('loginBtn disabled when form validate failed', () => {
-    cy.get('input[type=text]').clear();
+    cy.get('input[type=email]').clear();
     cy.get('input[type=password]').clear();
     cy.get('.loginBtn').should('be.disabled');
   });
 
   it('login redirect to home page', () => {
-    cy.get('input[type=text]')
+    cy.get('input[type=email]')
       .clear()
-      .type(LOGIN_DATA.NAME);
+      .type(LOGIN_DATA.EMAIL);
     cy.get('input[type=password]')
       .clear()
       .type(LOGIN_DATA.PASSWORD);

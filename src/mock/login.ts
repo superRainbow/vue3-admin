@@ -103,8 +103,8 @@ const checkLogin = (validData: Array<{}>) => {
 };
 
 const login = (data: object) => {
-  const { NAME: name, PASSWORD: pwd } = LOGIN_DATA; // 解構賦值
-  const validData = Mock.valid({ name, pwd }, data);
+  const { EMAIL: email, PASSWORD: password } = LOGIN_DATA; // 解構賦值
+  const validData = Mock.valid({ email, password }, data);
   return checkLogin(validData);
 };
 

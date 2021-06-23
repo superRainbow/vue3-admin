@@ -8,7 +8,7 @@ import API from '@/utils/api';
 const errorHandler = ({ response }: any) => {
   const { status, data } = response;
   console.log('status', status);
-  alert(data.message || '發生錯誤，請稍後再試');
+  alert(data.errors || '發生錯誤，請稍後再試');
 };
 
 export default createStore({
@@ -21,6 +21,7 @@ export default createStore({
     user: {},
     sidebarList: [],
     token: '',
+    refreshToken: '',
     demoList: []
   },
   getters: {

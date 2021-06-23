@@ -5,8 +5,8 @@ const MENU_SETTING = {
 };
 
 const LOGIN_DATA = {
-  NAME: 'rainbow',
-  PASSWORD: '1qaz2wsx'
+  EMAIL: 'rainbow_wu@cht.com.tw',
+  PASSWORD: '`1QAZ2wsx'
 };
 
 export { MENU_SETTING, LOGIN_DATA };

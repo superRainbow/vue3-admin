@@ -4,9 +4,9 @@ describe('home page', () => {
   // runs once before all tests in the block
   before(() => {
     cy.visit('/');
-    cy.get('input[type=text]')
+    cy.get('input[type=email]')
       .clear()
-      .type(LOGIN_DATA.NAME);
+      .type(LOGIN_DATA.EMAIL);
     cy.get('input[type=password]')
       .clear()
       .type(LOGIN_DATA.PASSWORD);
