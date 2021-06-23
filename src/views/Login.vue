@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .login-container {
   height: 100%;
   width: 100%;

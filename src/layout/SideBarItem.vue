@@ -21,7 +21,7 @@
   </el-submenu>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .small-style {
   .title,
   .el-submenu__icon-arrow {

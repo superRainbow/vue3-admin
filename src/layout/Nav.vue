@@ -21,7 +21,7 @@
   </el-dropdown>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/style/variable.scss';
 
 .avatar-wrapper {
