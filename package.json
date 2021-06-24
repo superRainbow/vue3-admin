@@ -12,9 +12,11 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.170",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.28",
+    "lodash": "^4.17.21",
     "reset-css": "^5.0.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
