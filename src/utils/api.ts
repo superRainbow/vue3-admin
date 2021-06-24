@@ -1,6 +1,7 @@
 const API = {
-  LOGIN: `${process.env.VUE_APP_API_URL}/Auth/Login`,
-  DEMO_LIST: `${process.env.VUE_APP_API_URL}/Auth/demo-list`
+  LOGIN: '/Auth/Login',
+  REGISTER: '/Auth/Register',
+  REFRESH_TOKEN: '/Auth/RefreshToken'
 };
 
 export default API;

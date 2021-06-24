@@ -1,16 +1,7 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
 import { setLocalStorage } from '@/utils/localStorage';
-
+import { apiPostLogin } from '@/api';
 import router from '@/router';
-import API from '@/utils/api';
-
-const errorHandler = ({ response }: any) => {
-  const { status, data } = response;
-  console.log('status', status);
-  alert(data.errors || '發生錯誤，請稍後再試');
-};
-
 export default createStore({
   state: {
     isLoading: false,
@@ -64,32 +55,27 @@ export default createStore({
     }
   },
   actions: {
-    handLogin({ commit, dispatch }, { data }) {
+    async handLogin({ commit, dispatch }, { data }) {
       commit('UPDATE_LOADING', { flag: true, target: 'fullscreen' });
-      axios
-        .post(API.LOGIN, data)
-        .then(res => {
-          if (res.data.success) {
-            commit('SET_TOKEN', res.data.data.token);
-            commit('SET_SIDEBAR_LIST', res.data.data.menu);
-            commit('SET_USER_DATA', res.data.data.user);
-            router.push({ name: 'home' });
-          } else {
-            dispatch('toggleDialog', {
-              flag: true,
-              config: {
-                isCancelShow: false,
-                message: res.data.message
-              }
-            });
+      try {
+        dispatch('setLoginAction', await apiPostLogin(data));
+      } catch (error) {
+        console.log('error', error);
+        dispatch('toggleDialog', {
+          flag: true,
+          config: {
+            isCancelShow: false,
+            message: error.message
           }
-        })
-        .catch(error => {
-          errorHandler(error);
-        })
-        .finally(() => {
-          commit('UPDATE_LOADING', { flag: false });
         });
+      }
+      commit('UPDATE_LOADING', { flag: false });
+    },
+    setLoginAction({ commit }, data) {
+      commit('SET_TOKEN', data.data.token);
+      commit('SET_SIDEBAR_LIST', data.data.menu);
+      commit('SET_USER_DATA', data.data.user);
+      router.push({ name: 'home' });
     },
     logout({ commit }) {
       commit('SET_TOKEN', '');
@@ -111,19 +97,19 @@ export default createStore({
     },
     getDemoList({ commit, dispatch }) {
       commit('UPDATE_LOADING', { flag: true });
-      axios
-        .get(API.DEMO_LIST)
-        .then(res => {
-          if (res.data.success) {
-            dispatch('setDemoList', res.data.data);
-          }
-        })
-        .catch(error => {
-          errorHandler(error);
-        })
-        .finally(() => {
-          commit('UPDATE_LOADING', { flag: false });
-        });
+      // axios
+      //   .get(API.DEMO_LIST)
+      //   .then(res => {
+      //     if (res.data.success) {
+      //       dispatch('setDemoList', res.data.data);
+      //     }
+      //   })
+      //   .catch(error => {
+      //     errorHandler(error);
+      //   })
+      //   .finally(() => {
+      //     commit('UPDATE_LOADING', { flag: false });
+      //   });
     }
   },
   modules: {}

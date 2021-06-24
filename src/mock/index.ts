@@ -1,16 +1,16 @@
-import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
+import { createServer } from 'miragejs';
 import API from '@/utils/api';
 import login from './login';
-import list from './list';
 
-const mock = new MockAdapter(axios, { delayResponse: 2000 });
-mock.onPost(API.LOGIN).reply(config => {
-  console.log('config', config);
-  const data = JSON.parse(config.data);
-  return login(data);
-});
+createServer({
+  routes() {
+    this.urlPrefix = `${process.env.VUE_APP_API_URL}`;
 
-mock.onGet(API.DEMO_LIST).reply(() => {
-  return list();
+    this.post(API.LOGIN, (schema: any, request) => {
+      const data = JSON.parse(request.requestBody);
+      console.log('data', data);
+
+      return login(data);
+    });
+  }
 });
