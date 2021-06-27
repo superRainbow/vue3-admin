@@ -1,5 +1,6 @@
 import axios from 'axios';
 import API from '@/utils/api';
+import { getLocalStorage } from '@/utils/localStorage';
 
 const api = axios.create({
   baseURL: `${process.env.VUE_APP_API_URL}`
@@ -33,4 +34,8 @@ api.interceptors.response.use(
 
 export const postRegister = (data: object) => api.post(API.REGISTER, data);
 export const postLogin = (data: object) => api.post(API.LOGIN, data);
-export const postRefreshToken = (data: object) => api.post(API.REFRESH_TOKEN, data);
+export const postRefreshToken = () =>
+  api.post(API.REFRESH_TOKEN, {
+    token: getLocalStorage('token'),
+    refreshToken: getLocalStorage('refreshToken')
+  });
