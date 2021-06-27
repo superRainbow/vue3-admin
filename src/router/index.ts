@@ -3,6 +3,7 @@ import { isAuthenticated } from '@/utils/validate';
 import Layout from '@/layout/index.vue';
 import Login from '@/views/Login';
 import Home from '@/views/Home';
+import PageNotFound from '@/views/PageNotFound';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +21,8 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'home',
         component: Home
-      }
+      },
+      { path: '/:pathMatch(.*)*', component: PageNotFound }
     ]
   }
 ];
