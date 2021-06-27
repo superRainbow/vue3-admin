@@ -1,6 +1,7 @@
 import { createServer } from 'miragejs';
 import API from '@/utils/api';
 import login from './login';
+import todoList from './todo';
 
 createServer({
   routes() {
@@ -11,6 +12,10 @@ createServer({
       console.log('data', data);
 
       return login(data);
+    });
+
+    this.get(API.TODO, () => {
+      return todoList();
     });
   }
 });

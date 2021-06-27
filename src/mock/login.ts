@@ -17,39 +17,13 @@ const showSuccessMsg = () => {
     errorCode: null,
     message: 'User logged in successfully',
     data: Mock.mock({
-      token: '@id',
+      token: 'rainbow token',
       user: {
         roles: ['admin'],
         avatar: 'https://avatars.githubusercontent.com/u/35356592',
         name: 'rainbow'
       },
       menu: [
-        {
-          hidden: false,
-          path: 'permission',
-          meta: {
-            title: '權限',
-            icon: 'el-icon-lock'
-          },
-          children: [
-            {
-              hidden: false,
-              path: 'role',
-              meta: {
-                title: '角色權限',
-                icon: 'el-icon-lock'
-              }
-            },
-            {
-              hidden: false,
-              path: 'page',
-              meta: {
-                title: '功能權限',
-                icon: 'el-icon-lock'
-              }
-            }
-          ]
-        },
         {
           hidden: true,
           path: 'hidden',
@@ -60,17 +34,9 @@ const showSuccessMsg = () => {
         },
         {
           hidden: false,
-          path: 'list-1',
+          path: 'todo',
           meta: {
-            title: '基本 table',
-            icon: 'el-icon-s-order'
-          }
-        },
-        {
-          hidden: false,
-          path: 'list-2',
-          meta: {
-            title: '篩選 table',
+            title: 'todo',
             icon: 'el-icon-s-order'
           }
         },
