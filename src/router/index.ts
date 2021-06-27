@@ -1,11 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import { isAuthenticated } from '@/utils/validate';
-import Login from '@/views/Login.vue';
 import Layout from '@/layout/index.vue';
-import Home from '@/views/Home.vue';
-import List1 from '@/views/List-1.vue';
-import List2 from '@/views/List-2.vue';
-import Profile from '@/views/Profile.vue';
+import Login from '@/views/Login/index.vue';
+import Home from '@/views/Home/index.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,21 +20,6 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'home',
         component: Home
-      },
-      {
-        path: 'profile',
-        name: 'profile',
-        component: Profile
-      },
-      {
-        path: 'list-1',
-        name: 'list-1',
-        component: List1
-      },
-      {
-        path: 'list-2',
-        name: 'list-2',
-        component: List2
       }
     ]
   }
