@@ -4,6 +4,7 @@ import Layout from '@/layout/index.vue';
 import Login from '@/views/Login';
 import Home from '@/views/Home';
 import PageNotFound from '@/views/PageNotFound';
+import TodoList from '@/views/Todo/list.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'home',
         component: Home
+      },
+      {
+        path: 'todo',
+        name: 'todo',
+        component: TodoList
       },
       { path: '/:pathMatch(.*)*', component: PageNotFound }
     ]
