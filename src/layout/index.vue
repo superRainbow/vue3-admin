@@ -14,7 +14,6 @@
 .container {
   @extend %width-height;
   position: relative;
-  background-color: $bg-gary;
 }
 
 .content {
