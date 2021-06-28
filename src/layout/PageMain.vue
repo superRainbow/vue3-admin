@@ -6,10 +6,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/style/variable.scss';
-main {
-  padding: $spacing-40;
-}
 </style>
 
 <script lang="ts">
