@@ -39,5 +39,5 @@ api.interceptors.response.use(
 export const getTodoList = () => api.get(API.TODO);
 export const postTodoItem = (data: object) => api.post(API.TODO, data);
 export const getTodoItem = (id: number) => api.get(`${API.TODO}/${id}`);
-export const putTodoItem = (id: number) => api.put(`${API.TODO}/${id}`);
+export const putTodoItem = (id: number, data: object) => api.put(`${API.TODO}/${id}`, data);
 export const deleteTodoItem = (id: number) => api.delete(`${API.TODO}/${id}`);
