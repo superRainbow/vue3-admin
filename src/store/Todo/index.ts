@@ -1,6 +1,15 @@
 import { Module } from 'vuex';
 import { apiGetTodoList, apiDeleteTodoItem, apiPostTodoItem, apiPutTodoItem } from '@/api';
 
+const defaultModalConfig = {
+  type: 'add',
+  width: '50%',
+  isCancelShow: false,
+  confirmCallback: () => {
+    return;
+  }
+};
+
 const todo: Module<any, any> = {
   namespaced: true,
   state: {
@@ -22,10 +31,10 @@ const todo: Module<any, any> = {
         return item;
       });
     },
-    TOGGLE_MODAL(state, { flag, config, data }) {
+    TOGGLE_MODAL(state, { flag, config = {}, data = {} }) {
       state.isModalShow = flag ? true : false;
-      state.modalConfig = config ? config : {};
-      state.modalData = data ? data : {};
+      state.modalConfig = Object.assign(defaultModalConfig, config);
+      state.modalData = data;
     }
   },
   actions: {

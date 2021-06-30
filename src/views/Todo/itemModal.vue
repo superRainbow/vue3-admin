@@ -45,19 +45,10 @@
 import { defineComponent, computed, ref, reactive, watch, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
-const defaultConfig = {
-  type: 'add',
-  width: '50%',
-  isCancelShow: false,
-  confirmCallback: () => {
-    return;
-  },
-};
-
 export default defineComponent({
   setup() {
     const store = useStore();
-    const modalConfig = computed(() => Object.assign(defaultConfig, store.getters['todo/modalConfig']));
+    const modalConfig = computed(() => store.getters['todo/modalConfig']);
 
     const formRef = ref();
     const form = reactive(computed(() => store.getters['todo/modalData']));
