@@ -35,6 +35,9 @@ const todo: Module<any, any> = {
       state.isModalShow = flag ? true : false;
       state.modalConfig = Object.assign(defaultModalConfig, config);
       state.modalData = data;
+    },
+    SET_MODAL(state, data) {
+      state.modalData = data;
     }
   },
   actions: {
@@ -53,8 +56,8 @@ const todo: Module<any, any> = {
     async addItem({ getters, commit, dispatch }, data) {
       try {
         commit('SET_ACTION_NAME', 'todo/addItem', { root: true });
-        const res = await apiPostTodoItem(data);
-        const newData = [...getters.list, res];
+        const addData = await apiPostTodoItem(data);
+        const newData = [...getters.list, addData];
         dispatch('setList', newData);
       } catch (error) {
         console.log('error', error);
@@ -90,6 +93,9 @@ const todo: Module<any, any> = {
     },
     toggleModal({ commit }, { flag, config, data }) {
       commit('TOGGLE_MODAL', { flag, config, data });
+    },
+    setModalDate({ commit }, data) {
+      commit('SET_MODAL', data);
     }
   }
 };

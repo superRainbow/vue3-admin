@@ -42,7 +42,7 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref, reactive, watch, watchEffect } from 'vue';
+import { defineComponent, computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -51,7 +51,10 @@ export default defineComponent({
     const modalConfig = computed(() => store.getters['todo/modalConfig']);
 
     const formRef = ref();
-    const form = reactive(computed(() => store.getters['todo/modalData']));
+    const form = computed({
+      get: () => store.getters['todo/modalData'],
+      set: (newValue) => store.dispatch('todo/setModalDate', newValue),
+    });
     const isDisabled = ref(true);
     const formRules = {
       title: [{ required: true, message: '請輸入標題', trigger: 'blur' }],
@@ -59,11 +62,8 @@ export default defineComponent({
     };
 
     const formValidate = () => {
-      console.log('formValidate', formRef?.value?.validate());
       formRef?.value?.validate((valid: boolean) => (isDisabled.value = !valid));
     };
-
-    // watch(form, () => formValidate(), { deep: true });
 
     watchEffect(() => formValidate());
 
