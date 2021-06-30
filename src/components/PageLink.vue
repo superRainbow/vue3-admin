@@ -1,6 +1,6 @@
 <template>
   <component v-bind:is="componentType"
-             v-bind="redirect">
+             v-bind="redirectLink">
     <slot />
   </component>
 </template>
@@ -21,18 +21,19 @@ export default defineComponent({
   },
   setup(props) {
     const link = ref(props.to);
-    const redirect = computed(() => {
-      if (isAbsolutePath(link.value)) {
-        return {
-          target: '_blank',
-          href: link.value,
-          rel: 'noopener',
-        };
-      } else {
-        return {
-          to: link.value,
-        };
-      }
+
+    const aLink = {
+      target: '_blank',
+      href: link.value,
+      rel: 'noopener',
+    };
+
+    const routerLink = {
+      to: link.value,
+    };
+
+    const redirectLink = computed(() => {
+      return isAbsolutePath(link.value) ? aLink : routerLink;
     });
 
     const componentType = computed(() => {
@@ -40,8 +41,7 @@ export default defineComponent({
     });
 
     return {
-      link,
-      redirect,
+      redirectLink,
       componentType,
     };
   },
