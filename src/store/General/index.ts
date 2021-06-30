@@ -3,6 +3,19 @@ import router from '@/router';
 import { setLocalStorage } from '@/utils/localStorage';
 import { apiPostLogin, apiPostRefreshToken } from '@/api';
 
+const defaultConfig = {
+  message: '',
+  title: '提示',
+  cancelText: '取 消',
+  submitText: '確 定',
+  width: '30%',
+  showHeaderClose: true,
+  isCancelShow: false,
+  confirmCallback: () => {
+    return;
+  }
+};
+
 const general: Module<any, any> = {
   state: {
     isLoading: false,
@@ -35,9 +48,9 @@ const general: Module<any, any> = {
     UPDATE_MENU_OPEN(state) {
       state.isMenuOpen = !state.isMenuOpen;
     },
-    UPDATE_DIALOG_OPEN(state, { flag, config }) {
+    UPDATE_DIALOG_OPEN(state, { flag, config = {} }) {
       state.isDialogShow = flag ? true : false;
-      state.dialogConfig = config ? config : {};
+      state.dialogConfig = Object.assign(defaultConfig, config);
     },
     SET_SIDEBAR_LIST(state, data) {
       state.sidebarList = data;

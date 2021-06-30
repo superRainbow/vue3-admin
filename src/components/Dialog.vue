@@ -42,7 +42,7 @@ const defaultConfig = {
 export default defineComponent({
   setup() {
     const store = useStore();
-    const dialogConfig = computed(() => Object.assign(defaultConfig, store.getters.dialogConfig));
+    const dialogConfig = computed(() => store.getters.dialogConfig);
 
     const cancel = () => {
       store.dispatch('toggleDialog', false);
