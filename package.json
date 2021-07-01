@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve-mock": "NODE_ENV=mock vue-cli-service serve",
+    "serve-mock": "vue-cli-service serve --mode mock",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
