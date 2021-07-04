@@ -30,7 +30,6 @@
       <span class="dialog-footer">
         <el-button @click="cancel">取消</el-button>
         <el-button type="primary"
-                   :disabled="isDisabled"
                    @click="confirm">儲存</el-button>
       </span>
     </template>
@@ -42,39 +41,44 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watchEffect } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
   setup() {
     const store = useStore();
     const modalConfig = computed(() => store.getters['todo/modalConfig']);
-
     const formRef = ref();
     const form = computed({
       get: () => store.getters['todo/modalData'],
       set: (newValue) => store.dispatch('todo/setModalDate', newValue),
     });
-    const isDisabled = ref(true);
     const formRules = {
       title: [{ required: true, message: '請輸入標題', trigger: 'blur' }],
       description: [{ required: true, message: '請輸入描述', trigger: 'blur' }],
     };
 
-    const formValidate = () => {
-      formRef?.value?.validate((valid: boolean) => (isDisabled.value = !valid));
+    const resetFrom = () => {
+      formRef.value.resetFields();
+      formRef.value.clearValidate();
     };
-
-    watchEffect(() => formValidate());
 
     const cancel = () => {
       store.dispatch('todo/toggleModal', { flag: false });
+      resetFrom();
     };
 
     const confirm = () => {
-      const action = modalConfig.value.type === 'add' ? 'todo/addItem' : 'todo/putItem';
-      store.dispatch(action, form.value);
-      modalConfig.value.confirmCallback();
+      formRef?.value?.validate((valid: boolean) => {
+        if (valid) {
+          const action = modalConfig.value.type === 'add' ? 'todo/addItem' : 'todo/putItem';
+          store.dispatch(action, form.value);
+          modalConfig.value.confirmCallback();
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     };
 
     return {
@@ -83,7 +87,6 @@ export default defineComponent({
       form,
       formRef,
       formRules,
-      isDisabled,
       cancel,
       confirm,
     };

@@ -1,4 +1,5 @@
 import { Module } from 'vuex';
+import _ from 'lodash';
 import { apiGetTodoList, apiDeleteTodoItem, apiPostTodoItem, apiPutTodoItem } from '@/api';
 
 const defaultModalConfig = {
@@ -8,6 +9,18 @@ const defaultModalConfig = {
   confirmCallback: () => {
     return;
   }
+};
+
+interface ModalData {
+  title: string;
+  description: string;
+  done: boolean;
+}
+
+const defaultModalData: ModalData = {
+  title: '',
+  description: '',
+  done: false
 };
 
 const todo: Module<any, any> = {
@@ -32,9 +45,12 @@ const todo: Module<any, any> = {
       });
     },
     TOGGLE_MODAL(state, { flag, config = {}, data = {} }) {
+      const modalConfig = _.cloneDeep(defaultModalConfig);
+      const modal = _.cloneDeep(defaultModalData);
+
       state.isModalShow = flag ? true : false;
-      state.modalConfig = Object.assign(defaultModalConfig, config);
-      state.modalData = data;
+      state.modalConfig = Object.assign(modalConfig, config);
+      state.modalData = Object.assign(modal, data);
     },
     SET_MODAL(state, data) {
       state.modalData = data;
@@ -95,6 +111,8 @@ const todo: Module<any, any> = {
       commit('TOGGLE_MODAL', { flag, config, data });
     },
     setModalDate({ commit }, data) {
+      console.log('data', data);
+
       commit('SET_MODAL', data);
     }
   }
