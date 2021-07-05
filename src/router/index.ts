@@ -5,6 +5,7 @@ import Login from '@/views/Login';
 import Home from '@/views/Home';
 import PageNotFound from '@/views/PageNotFound';
 import TodoList from '@/views/Todo/list.vue';
+import UserList from '@/views/User/UserList.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'todo',
         name: 'todo',
         component: TodoList
+      },
+      {
+        path: 'userList',
+        name: 'userList',
+        component: UserList
       },
       { path: '/:pathMatch(.*)*', component: PageNotFound }
     ]
