@@ -47,6 +47,14 @@ const showSuccessMsg = () => {
             title: '外部連結',
             icon: 'el-icon-link'
           }
+        },
+        {
+          hidden: false,
+          path: 'userList',
+          meta: {
+            title: '使用者',
+            icon: 'el-icon-s-order'
+          }
         }
       ]
     })
