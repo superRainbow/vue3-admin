@@ -102,7 +102,7 @@ const general: Module<any, any> = {
         },
         {
           hidden: false,
-          path: 'userList',
+          path: 'investor',
           meta: {
             title: '使用者',
             icon: 'el-icon-circle-plus'

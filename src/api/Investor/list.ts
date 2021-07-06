@@ -38,4 +38,4 @@ api.interceptors.response.use(
   }
 );
 
-export const postUserDetail = (id: string) => api.post(API.GET_USER, { cid: id });
+export const getInvestorList = () => api.get(API.GET_LIST);

@@ -1,12 +1,12 @@
 <script>
-import { onMounted, ref } from '@vue/runtime-core';
+import { computed, onBeforeMount, ref } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
   setup() {
     const store = useStore();
 
-    const data = ref([]);
+    const data = computed(() => store.getters['investor/list']);
 
     const columnArray = [
       { prop: 'id', label: '身分證號', width: '150' },
@@ -17,10 +17,9 @@ export default {
       { prop: 'weight', label: '體重', width: '100' }
     ];
 
-    onMounted(() => {
-      store.dispatch('user/handUserList').then(res => {
-        data.value = store.getters['user/receiveUserList'];
-        console.log('data => ', data.value);
+    onBeforeMount(() => {
+      store.dispatch('investor/handList').then(res => {
+        console.log('investor data => ', res);
       });
     });
 

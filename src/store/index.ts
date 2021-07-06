@@ -1,12 +1,12 @@
 import { createStore } from 'vuex';
 import general from './General';
 import todo from './Todo';
-import user from './User';
+import investor from './Investor';
 
 export default createStore({
   modules: {
     general,
     todo,
-    user
+    investor
   }
 });
