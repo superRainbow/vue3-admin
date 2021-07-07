@@ -26,7 +26,7 @@ api.interceptors.response.use(
   response => {
     if (response.status === 200) {
       console.log('回傳資料 => ', response);
-      return response.data.Data;
+      return response.data;
     } else {
       console.log('回傳資料 != 200 => ', response);
       return Promise.reject(response.data);

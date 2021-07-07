@@ -6,7 +6,8 @@ export default {
   setup() {
     const store = useStore();
 
-    const data = computed(() => store.getters['investor/list']);
+    const invList = computed(() => store.getters['investor/list']);
+    const invDetail = computed(() => store.getters['investor/detail']);
 
     const columnArray = [
       { prop: 'id', label: '身分證號', width: '150' },
@@ -18,21 +19,63 @@ export default {
     ];
 
     onBeforeMount(() => {
-      store.dispatch('investor/handList').then(res => {
-        console.log('investor data => ', res);
-      });
+      store.dispatch('investor/handList');
+
+      // console.log('invList => ', invList);
     });
 
-    return { columnArray, data };
+    const handRowClick = row => {
+      console.log('row => ', row);
+      // console.log('column => ', column);
+      // console.log('event => ', event);
+
+      const id = row.id;
+      console.log('cid => ', id);
+
+      /** 目前因為不想動我測試API，所以暫時這樣處理 **/
+      // store.dispatch('investor/handDetail', id);
+      store.dispatch('investor/handDetail', id).then(() => {
+        // /** 只確認這樣做是可以的，無須顯示 **/
+        // const item = invList.value.filter(it => it.id === id);
+        // console.log('item => ', item);
+        // item[0].address = invDetail.value.address;
+        // item[0].cid = invDetail.value.cid;
+        // item[0].email = invDetail.value.email;
+        // item[0].lastName = invDetail.value.lastName;
+        // item[0].name = invDetail.value.name;
+        // item[0].phone = invDetail.value.phone;
+        // item[0].random = invDetail.value.random;
+        // /** 只確認這樣做是可以的，無須顯示 **/
+        // console.log('RES => ', invList.value);
+      });
+
+      // console.log('invDetail => ', invDetail);
+    };
+
+    return { columnArray, invList, handRowClick, invDetail };
   }
 };
 </script>
 
 <template>
-  <el-table v-if="data.length > 0" :data="data" :default-sort="{ prop: 'id', order: 'ascending' }" stripe highlight-current-row style="width: 100%">
+  <el-table
+    v-if="invList.length > 0"
+    :data="invList"
+    :default-sort="{ prop: 'id', order: 'ascending' }"
+    stripe
+    highlight-current-row
+    style="width: 100%"
+    @row-click.="handRowClick"
+  >
+    <el-table-column type="expand">
+      <template #default="props">
+        <h1>職稱：{{ props.row.title }}</h1>
+      </template>
+    </el-table-column>
+
     <el-table-column
       v-for="column in columnArray"
-      :key="column.id"
+      :key="column"
       :prop="column.prop"
       :label="column.label"
       :sortable="column.prop === 'id' ? true : false"
@@ -40,6 +83,8 @@ export default {
     >
     </el-table-column>
   </el-table>
+
+  <!-- <h1 v-if="invDetail.cid">{{ invDetail }}</h1> -->
 </template>
 
 <style lang="scss" scoped>

@@ -22,7 +22,7 @@ const investor: Module<any, any> = {
         commit('UPDATE_LOADING', { flag: true }, { root: true });
 
         const res = await apiGetInvestorList();
-        console.log('handList res => ', res);
+        // console.log('handList res => ', res);
 
         commit('SET_LIST', res);
       } catch (error) {
@@ -37,7 +37,7 @@ const investor: Module<any, any> = {
         commit('UPDATE_LOADING', { flag: true }, { root: true });
 
         const res = await apiPostInvestorDetail(cid);
-        console.log('handDetail res => ', res);
+        // console.log('handDetail res => ', res);
 
         commit('SET_DETAIL', res);
       } catch (error) {
