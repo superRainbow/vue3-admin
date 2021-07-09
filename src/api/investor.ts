@@ -26,7 +26,7 @@ api.interceptors.response.use(
   response => {
     if (response.status === 200) {
       console.log('回傳資料 => ', response);
-      return response.data;
+      return response.data.Data;
     } else {
       console.log('回傳資料 != 200 => ', response);
       return Promise.reject(response.data);
@@ -38,4 +38,5 @@ api.interceptors.response.use(
   }
 );
 
+export const getInvestorList = () => api.get(API.GET_LIST);
 export const postInvestorDetail = (id: string) => api.post(API.GET_USER, { cid: id });

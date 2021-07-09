@@ -27,9 +27,8 @@ const investor: Module<any, any> = {
         commit('SET_LIST', res);
       } catch (error) {
         console.log('handList error => ', error);
-      } finally {
-        commit('UPDATE_LOADING', { flag: false }, { root: true });
       }
+      commit('UPDATE_LOADING', { flag: false }, { root: true });
     },
 
     async handDetail({ commit }, cid) {
@@ -42,9 +41,8 @@ const investor: Module<any, any> = {
         commit('SET_DETAIL', res);
       } catch (error) {
         console.log('handDetail error => ', error);
-      } finally {
-        commit('UPDATE_LOADING', { flag: false }, { root: true });
       }
+      commit('UPDATE_LOADING', { flag: false }, { root: true });
     }
   },
 

@@ -1,7 +1,6 @@
 import { postRegister, postLogin, postRefreshToken } from './auth';
 import { getTodoList, getTodoItem, postTodoItem, putTodoItem, deleteTodoItem } from './todo';
-import { postInvestorDetail } from './Investor/detail';
-import { getInvestorList } from './Investor/list';
+import { getInvestorList, postInvestorDetail } from './investor';
 
 export const apiPostRegister = postRegister;
 export const apiPostLogin = postLogin;
