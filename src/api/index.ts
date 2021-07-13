@@ -1,8 +1,9 @@
-import { postRegister, postLogin, postRefreshToken } from './auth';
-import { getTodoList, getTodoItem, postTodoItem, putTodoItem, deleteTodoItem } from './todo';
+import { postRegister, postLogin, getLogout, postRefreshToken } from './modules/auth';
+import { getTodoList, getTodoItem, postTodoItem, putTodoItem, deleteTodoItem } from './modules/todo';
 
 export const apiPostRegister = postRegister;
 export const apiPostLogin = postLogin;
+export const apiGetLogout = getLogout;
 export const apiPostRefreshToken = postRefreshToken;
 
 export const apiGetTodoList = getTodoList;
