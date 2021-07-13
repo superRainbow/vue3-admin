@@ -1,16 +1,20 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { getLocalStorage } from '@/utils/localStorage';
+import { getLocalStorage, setLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
 import { isPostOrPut } from '@/utils/validate';
 import { API_CODE } from '@/utils/constants';
 import store from '@/store';
 
 const refreshTokenAction = () => {
-  store.dispatch('refreshToken');
+  store.dispatch('refreshToken', getLocalStorageObject('action'));
 };
 
 const logoutAction = () => {
   store.dispatch('logout');
+};
+
+const clearAction = () => {
+  setLocalStorage('action', '');
 };
 
 const showErrorMessage = (error: { [key: string]: any }) => {
@@ -27,6 +31,7 @@ const handleResAction = (res: { [key: string]: any }) => {
   console.log('handleError', res);
   if (res.returnCode === API_CODE.SUCCESS) {
     console.log('SUCCESS');
+    clearAction();
     return res.data;
   }
   if (res.status === API_CODE.CALL_REFRESH_TOKEN) {
@@ -36,10 +41,12 @@ const handleResAction = (res: { [key: string]: any }) => {
   }
   if (API_CODE.CALL_LOGOUT.includes(res.returnCode)) {
     console.log('CALL_LOGOUT');
+    clearAction();
     logoutAction();
     return;
   }
   console.log('OTHER');
+  clearAction();
   showErrorMessage(res);
   return Promise.reject(res);
 };

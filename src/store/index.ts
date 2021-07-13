@@ -1,10 +1,10 @@
 import { createStore } from 'vuex';
-import general from './General';
-import todo from './Todo';
+import global from './modules/global';
+import todo from './modules/todo';
 
 export default createStore({
   modules: {
-    general,
+    global,
     todo
   }
 });
