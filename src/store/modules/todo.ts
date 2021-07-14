@@ -1,5 +1,4 @@
 import { Module } from 'vuex';
-import _ from 'lodash';
 import { apiGetTodoList, apiDeleteTodoItem, apiPostTodoItem, apiPutTodoItem } from '@/api';
 import { Modal, CallAPI } from '@/store/helper';
 class ModalData {

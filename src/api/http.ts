@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { getLocalStorage, setLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
+import { getLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
 import { isPostOrPut } from '@/utils/validate';
 import { API_CODE } from '@/utils/constants';
 import store from '@/store';
