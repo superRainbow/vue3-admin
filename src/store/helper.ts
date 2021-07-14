@@ -9,7 +9,7 @@ const tryCatch = (method: Function) => {
   };
 };
 
-class Action {
+class CallAPI {
   name = '';
   data = '';
 
@@ -47,4 +47,4 @@ class Modal {
   }
 }
 
-export { tryCatch, Action, JWT, Modal };
+export { tryCatch, CallAPI, JWT, Modal };

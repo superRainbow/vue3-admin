@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import _ from 'lodash';
 import { apiGetTodoList, apiDeleteTodoItem, apiPostTodoItem, apiPutTodoItem } from '@/api';
-import { Modal, Action } from '@/store/helper';
+import { Modal, CallAPI } from '@/store/helper';
 class ModalData {
   title = '';
   description = '';
@@ -47,7 +47,7 @@ const todo: Module<any, any> = {
     },
     async getList({ commit, dispatch }) {
       commit('UPDATE_LOADING', { flag: true }, { root: true });
-      commit('SET_ACTION', new Action('todo/getList'), { root: true });
+      dispatch('setCallAPI', new CallAPI('todo/getList'), { root: true });
       const res = await apiGetTodoList();
       if (res) {
         dispatch('setList', res);
@@ -55,7 +55,7 @@ const todo: Module<any, any> = {
       commit('UPDATE_LOADING', { flag: false }, { root: true });
     },
     async addItem({ getters, commit, dispatch }, data) {
-      commit('SET_ACTION', new Action('todo/addItem', data), { root: true });
+      dispatch('setCallAPI', new CallAPI('todo/addItem', data), { root: true });
       const res = await apiPostTodoItem(data);
       if (res) {
         dispatch('setList', [...getters.list, res]);
@@ -63,14 +63,14 @@ const todo: Module<any, any> = {
       commit('TOGGLE_MODAL', { flag: false });
     },
     async putItem({ getters, commit, dispatch }, data) {
-      commit('SET_ACTION', new Action(`todo/putItem`, data), { root: true });
+      dispatch('setCallAPI', new CallAPI(`todo/putItem`, data), { root: true });
       await apiPutTodoItem(data.id, data);
       const newData = getters.list.map((item: { [key: string]: any }) => (item = item.id === data.id ? data : item));
       dispatch('setList', newData);
       commit('TOGGLE_MODAL', { flag: false });
     },
     async deleteItem({ getters, commit, dispatch }, id: number | string) {
-      commit('SET_ACTION', new Action(`todo/deleteItem`, id), { root: true });
+      dispatch('setCallAPI', new CallAPI(`todo/deleteItem`, id), { root: true });
       await apiDeleteTodoItem(id);
       const newData = getters.list.filter((item: { [key: string]: any }) => item.id !== id);
       dispatch('setList', newData);
