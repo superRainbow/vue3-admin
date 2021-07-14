@@ -7,8 +7,7 @@
              plain>
     新增
   </el-button>
-  <el-table v-if="data.length > 0"
-            :data="data"
+  <el-table :data="data"
             :default-sort="{prop: 'id', order: 'title'}"
             stripe
             highlight-current-row

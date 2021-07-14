@@ -5,5 +5,9 @@ export function isAbsolutePath(path: string) {
 }
 
 export function isAuthenticated() {
-  return getLocalStorage('token') ? true : false;
+  return getLocalStorage('accessToken') ? true : false;
+}
+
+export function isPostOrPut(method: string) {
+  return ['post', 'put'].indexOf(method) >= 0 ? true : false;
 }

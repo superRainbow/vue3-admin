@@ -36,8 +36,8 @@ export default defineComponent({
     };
 
     const confirm = () => {
-      store.dispatch('toggleDialog', false);
       dialogConfig.value.confirmCallback();
+      store.dispatch('toggleDialog', false);
     };
 
     return {
