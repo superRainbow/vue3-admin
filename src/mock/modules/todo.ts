@@ -38,8 +38,8 @@ export default function(server: any) {
   });
 
   server.post(API.TODO, (schema: any, request: any) => {
-    const data = JSON.parse(request.requestBody);
-    return new Res('success');
+    const item = JSON.parse(request.requestBody).reqBody.data;
+    return new Res('success', { id: data.length + 1, ...item });
   });
 
   server.get(`${API.TODO}/:id`, (schema: any, request: any) => {
