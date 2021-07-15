@@ -50,8 +50,8 @@ const global: Module<any, any> = {
       state.user = data;
       setLocalStorage('user', data);
     },
-    SET_ACTION(state, data) {
-      setLocalStorage('action', data);
+    SET_CALL_API(state, data = '') {
+      setLocalStorage('callAPI', data);
     }
   },
   actions: {
@@ -91,8 +91,8 @@ const global: Module<any, any> = {
     toggleDialog({ commit }, { flag, config }) {
       commit('UPDATE_DIALOG_OPEN', { flag, config });
     },
-    setActionName({ commit }, data) {
-      commit('SET_ACTION', data);
+    setCallAPI({ commit }, data) {
+      commit('SET_CALL_API', data);
     }
   }
 };

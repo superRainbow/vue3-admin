@@ -1,20 +1,12 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { getLocalStorage, setLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
+import { getLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
 import { isPostOrPut } from '@/utils/validate';
 import { API_CODE } from '@/utils/constants';
 import store from '@/store';
 
-const refreshTokenAction = () => {
-  store.dispatch('refreshToken', getLocalStorageObject('action'));
-};
-
-const logoutAction = () => {
-  store.dispatch('logout');
-};
-
-const clearAction = () => {
-  setLocalStorage('action', '');
+const clearCallAPI = () => {
+  store.dispatch('setCallAPI');
 };
 
 const showErrorMessage = (error: { [key: string]: any }) => {
@@ -22,16 +14,41 @@ const showErrorMessage = (error: { [key: string]: any }) => {
     flag: true,
     config: {
       isCancelShow: false,
-      message: error.message || '發生錯誤'
+      message: error.message || '發生錯誤',
+      confirmCallback: () => {
+        return error.callback ? error.callback() : '';
+      }
     }
   });
+};
+
+const refreshTokenAction = () => {
+  store.dispatch('refreshToken', getLocalStorageObject('action'));
+};
+
+const logoutAction = () => {
+  const errorData = {
+    message: '已過期，請重新登入',
+    callback: () => {
+      store.dispatch('logout');
+      clearCallAPI();
+    }
+  };
+
+  showErrorMessage(errorData);
+};
+
+const otherErrorAction = (res: object) => {
+  clearCallAPI();
+  showErrorMessage(res);
+  return Promise.reject(res);
 };
 
 const handleResAction = (res: { [key: string]: any }) => {
   console.log('handleError', res);
   if (res.returnCode === API_CODE.SUCCESS) {
     console.log('SUCCESS');
-    clearAction();
+    clearCallAPI();
     return res.data;
   }
   if (res.status === API_CODE.CALL_REFRESH_TOKEN) {
@@ -41,14 +58,11 @@ const handleResAction = (res: { [key: string]: any }) => {
   }
   if (API_CODE.CALL_LOGOUT.includes(res.returnCode)) {
     console.log('CALL_LOGOUT');
-    clearAction();
     logoutAction();
     return;
   }
   console.log('OTHER');
-  clearAction();
-  showErrorMessage(res);
-  return Promise.reject(res);
+  otherErrorAction(res);
 };
 
 const generateReqData = (data: any, method: any) => {
