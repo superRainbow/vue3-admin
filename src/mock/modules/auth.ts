@@ -60,6 +60,14 @@ const data = {
         title: '資料維護',
         icon: 'el-icon-set-up'
       }
+    },
+    {
+      hidden: false,
+      path: 'investor',
+      meta: {
+        title: '投資者管理',
+        icon: 'el-icon-mobile'
+      }
     }
   ]
 };
