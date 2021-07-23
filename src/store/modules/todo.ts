@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { apiGetTodoList, apiDeleteTodoItem, apiPostTodoItem, apiPutTodoItem } from '@/api';
-import { Modal, CallAPI } from '@/store/helper';
+import { Modal, tryCatch, CallAPI } from '@/store/helper';
 class ModalData {
   title = '';
   description = '';
@@ -47,7 +47,7 @@ const todo: Module<any, any> = {
     async getList({ commit, dispatch }) {
       commit('UPDATE_LOADING', { flag: true }, { root: true });
       dispatch('setCallAPI', new CallAPI('todo/getList'), { root: true });
-      const res = await apiGetTodoList();
+      const res = await tryCatch(apiGetTodoList)();
       if (res) {
         dispatch('setList', res);
       }
@@ -55,7 +55,7 @@ const todo: Module<any, any> = {
     },
     async addItem({ getters, commit, dispatch }, data) {
       dispatch('setCallAPI', new CallAPI('todo/addItem', data), { root: true });
-      const res = await apiPostTodoItem(data);
+      const res = await tryCatch(apiPostTodoItem)(data);
       if (res) {
         dispatch('setList', [...getters.list, res]);
       }
@@ -63,14 +63,14 @@ const todo: Module<any, any> = {
     },
     async putItem({ getters, commit, dispatch }, data) {
       dispatch('setCallAPI', new CallAPI(`todo/putItem`, data), { root: true });
-      await apiPutTodoItem(data.id, data);
+      await tryCatch(apiPutTodoItem)(data.id, data);
       const newData = getters.list.map((item: { [key: string]: any }) => (item = item.id === data.id ? data : item));
       dispatch('setList', newData);
       commit('TOGGLE_MODAL', { flag: false });
     },
     async deleteItem({ getters, commit, dispatch }, id: number | string) {
       dispatch('setCallAPI', new CallAPI(`todo/deleteItem`, id), { root: true });
-      await apiDeleteTodoItem(id);
+      await tryCatch(apiDeleteTodoItem)(id);
       const newData = getters.list.filter((item: { [key: string]: any }) => item.id !== id);
       dispatch('setList', newData);
       commit('UPDATE_DIALOG_OPEN', { flag: false }, { root: true });
