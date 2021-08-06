@@ -23,7 +23,7 @@ const showErrorMessage = (error: { [key: string]: any }) => {
 };
 
 const refreshTokenAction = () => {
-  store.dispatch('refreshToken', getLocalStorageObject('action'));
+  store.dispatch('refreshToken', getLocalStorageObject('callAPI'));
 };
 
 const logoutAction = () => {
