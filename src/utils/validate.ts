@@ -11,3 +11,12 @@ export function isAuthenticated() {
 export function isPostOrPut(method: string) {
   return ['post', 'put'].indexOf(method) >= 0 ? true : false;
 }
+
+export function isJson(string: string) {
+  try {
+    JSON.parse(string);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}

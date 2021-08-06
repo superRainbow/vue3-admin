@@ -50,7 +50,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
-import { getLocalStorage, getLocalStorageObject } from '@/utils/localStorage';
+import { getLocalStorage } from '@/utils/localStorage';
 import SideBar from '@/layout/SideBar.vue';
 import MHeader from '@/layout/Header.vue';
 import PageMain from '@/layout/PageMain.vue';
@@ -64,10 +64,10 @@ export default defineComponent({
   setup() {
     const store = useStore();
     if (getLocalStorage('sidebarList')) {
-      store.dispatch('setSidebarList', getLocalStorageObject('sidebarList'));
+      store.dispatch('setSidebarList', getLocalStorage('sidebarList'));
     }
     if (getLocalStorage('user')) {
-      store.dispatch('setUserData', getLocalStorageObject('user'));
+      store.dispatch('setUserData', getLocalStorage('user'));
     }
     return {
       opened: computed(() => store.getters.isMenuOpen),
