@@ -24,7 +24,7 @@
 
   :deep(aside) {
     width: var(--sideBar-width);
-    height: calc(100% - var(--header-height));
+    height: 100%;
     background-color: $sideBar-bg;
     transition: width 0.3s;
 

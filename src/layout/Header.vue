@@ -1,30 +1,52 @@
 <template>
   <header>
-    <section class="logo">
-      <img src="@/assets/logo.png"
-           alt="logo">
-    </section>
-    <section class="function">
+    <section class="title">
       <i :class="opened ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
          @click="toggleOpen()"></i>
-      <Nav class="nav" />
+      <h1>{{WEB_TITLE}}</h1>
     </section>
+    <Nav class="nav" />
   </header>
 </template>
 
 <style lang="scss" scoped>
 @import '@/style/variable.scss';
 header {
+  --sideBar-width: #{$sideBar-width}px;
   --header-height: #{$header-height}px;
-  display: flex;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
+  z-index: $zIndex-header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: var(--header-height);
-  padding: 0;
+  box-sizing: border-box;
+  padding: $spacing-15 $spacing-40 $spacing-15 var(--sideBar-width);
   background-color: $white;
-  z-index: $zIndex-header;
+  transition: padding 0.1s linear;
+
+  @at-root .small-style & {
+    --sideBar-width: #{$sideBar-small-width}px;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    padding: 0 $spacing-15;
+    .el-icon-s-unfold,
+    .el-icon-s-fold {
+      @extend %link-pointer;
+      font-size: 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-left: $spacing-15;
+    }
+  }
 
   .function {
     --sideBar-width: #{$sideBar-width}px;
@@ -34,44 +56,15 @@ header {
     box-sizing: border-box;
     width: calc(100% - var(--sideBar-width));
     padding: $spacing-15 $spacing-40;
+    margin-left: #{$sideBar-width}px;
 
     @at-root .small-style & {
       --sideBar-width: #{$sideBar-small-width}px;
-    }
-
-    .el-icon-s-unfold,
-    .el-icon-s-fold {
-      @extend %link-pointer;
-      font-size: 20px;
     }
 
     .nav {
       position: absolute;
       right: $spacing-40;
-    }
-  }
-
-  .logo {
-    --sideBar-width: #{$sideBar-width}px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    width: var(--sideBar-width);
-    height: 100%;
-    padding: $spacing-15;
-    background-color: $sideBar-bg;
-    border-bottom: 1px solid $header-border;
-    overflow: hidden;
-    transition: width 0.3s;
-
-    @at-root .small-style & {
-      --sideBar-width: #{$sideBar-small-width}px;
-    }
-
-    img {
-      display: block;
-      width: 30px;
-      height: auto;
     }
   }
 }
@@ -81,6 +74,7 @@ header {
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import Nav from '@/layout/Nav.vue';
+import { WEB_TITLE } from '@/utils/constants';
 
 export default defineComponent({
   components: {
@@ -90,6 +84,7 @@ export default defineComponent({
     const store = useStore();
 
     return {
+      WEB_TITLE,
       opened: computed(() => store.getters.isMenuOpen),
       toggleOpen: () => store.commit('UPDATE_MENU_OPEN'),
     };

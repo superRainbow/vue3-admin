@@ -5,7 +5,7 @@
              :rules="loginRules"
              :model="loginForm">
       <div class="title">
-        <h2>後台系統</h2>
+        <h2>{{WEB_TITLE}}</h2>
       </div>
       <el-form-item prop="email">
         <el-input type="email"
@@ -56,6 +56,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, onMounted, watch } from 'vue';
 import { useStore } from 'vuex';
+import { WEB_TITLE } from '@/utils/constants';
 
 export default defineComponent({
   setup() {
@@ -94,6 +95,7 @@ export default defineComponent({
     };
 
     return {
+      WEB_TITLE,
       loginFormRef,
       loginForm,
       loginRules,

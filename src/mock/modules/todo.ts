@@ -1,3 +1,4 @@
+import { Server } from 'miragejs';
 import { Res } from '../helper';
 import API from '@/utils/api';
 import { getLocalStorage } from '@/utils/localStorage';
@@ -7,20 +8,20 @@ const data = [
     id: 1,
     title: 'Test1',
     description: 'Test1 Description',
-    done: true
+    done: true,
   },
   {
     id: 2,
     title: 'Test2',
     description: '1232',
-    done: false
+    done: false,
   },
   {
     id: 3,
     title: 'Test3',
     description: 'Test3 Desc',
-    done: false
-  }
+    done: false,
+  },
 ];
 
 const getTodoList = () => {
@@ -32,7 +33,7 @@ const getTodoItem = (id: number) => {
   return new Res('success', item);
 };
 
-export default function(server: any) {
+export default function (server: Server): void {
   server.get(API.TODO, () => {
     return getTodoList();
   });
