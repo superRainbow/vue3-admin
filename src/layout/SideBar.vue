@@ -15,6 +15,7 @@
                :collapse-transition="false"
                :collapse="!opened">
         <sidebar-item v-for="item in filterSidebarList"
+                      :level="1"
                       :key="item.path"
                       :data="item"
                       :url="item.path"></sidebar-item>
