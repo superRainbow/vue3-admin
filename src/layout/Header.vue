@@ -43,8 +43,8 @@ header {
     }
 
     h1 {
-      font-size: 20px;
       margin-left: $spacing-15;
+      @extend %web-title-style;
     }
   }
 

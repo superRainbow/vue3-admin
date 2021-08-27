@@ -1,6 +1,7 @@
 <template>
   <template v-if="hasOnlyChild(item) &&(!childItem.children || childItem.noChild)">
     <el-menu-item v-if="childItem.meta"
+                  class="childItem"
                   :index="resolvePath(childItem.path)"
                   :route="resolvePath(childItem.path)">
       <i :class="childItem.meta.icon ? childItem.meta.icon : ''"></i>
@@ -21,6 +22,9 @@
 </template>
 
 <style lang="scss" scoped>
+.childItem {
+  padding-left: 50px !important;
+}
 .small-style {
   .title,
   .el-submenu__icon-arrow {

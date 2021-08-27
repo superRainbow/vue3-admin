@@ -29,6 +29,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import '@/style/variable.scss';
 .login-container {
   height: 100%;
   width: 100%;
@@ -37,10 +38,9 @@
 .title {
   margin-bottom: 30px;
   h2 {
-    font-size: 26px;
     color: #eee;
-    font-weight: bold;
     text-align: center;
+    @extend %web-title-style;
   }
 }
 .login-form {
@@ -65,7 +65,7 @@ export default defineComponent({
     const isDisabled = ref(true);
     const loginForm = reactive({
       email: 'rainbow_wu@cht.com.tw',
-      password: '`1QAZ2wsx',
+      password: '!QAZ2wsx',
     });
 
     const loginRules = {
