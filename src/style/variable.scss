@@ -1,5 +1,4 @@
 $--font-path: '~element-plus/theme-chalk/fonts';
-$--color-primary: hotpink;
 
 $white: #ffffff;
 $bg-gary: #f0f3f4;
@@ -14,6 +13,7 @@ $header-border: #454b61;
 
 $spacing-15: 15px;
 $spacing-40: 40px;
+$spacing-55: 55px;
 
 $zIndex-header: 999;
 
@@ -28,7 +28,11 @@ $avatar-size: 60px;
   cursor: pointer;
 }
 
-%title-style {
+%web-title-style {
   font-size: 1.8em;
   font-weight: bolder;
+}
+
+%page-title-style {
+  font-size: 1.6em;
 }

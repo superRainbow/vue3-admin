@@ -44,7 +44,7 @@
 @import '@/style/variable.scss';
 
 .title {
-  @extend %title-style;
+  @extend %page-title-style;
   margin-bottom: 20px;
 }
 

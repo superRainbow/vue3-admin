@@ -18,7 +18,7 @@
     "element-plus": "^1.1.0-beta.3",
     "lodash": "^4.17.21",
     "reset-css": "^5.0.1",
-    "vue": "^3.0.0",
+    "vue": "^3.2.2",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
   },
@@ -121,8 +121,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
-      "git add"
+      "vue-cli-service lint"
     ]
   }
 }

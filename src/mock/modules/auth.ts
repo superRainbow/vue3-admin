@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { Server } from 'miragejs';
 import { Res } from '../helper';
 import API from '@/utils/api';
 import { LOGIN_DATA } from '@/utils/constants';
@@ -9,59 +10,195 @@ const data = {
   refreshToken: 'ETRBCOX6G9DWS7XG-bd17240d-f859-4898-a2f1-9d05faa7ff9e',
   user: {
     name: 'rainbow',
+    groupType: '1',
     roles: ['User'],
-    avator: 'https://avatars.githubusercontent.com/u/35356592'
+    agentGroup: [],
   },
   menu: [
     {
-      hidden: true,
-      path: 'hidden',
-      meta: {
-        title: '隱藏',
-        icon: 'el-icon-document'
-      }
-    },
-    {
       hidden: false,
-      path: 'todo',
+      path: '',
       meta: {
         title: '案件管理',
-        icon: 'el-icon-document'
-      }
+        icon: 'el-icon-document',
+      },
+      children: [
+        {
+          hidden: false,
+          path: '/case/handle',
+          meta: {
+            title: '案件辦理',
+          },
+        },
+        {
+          hidden: false,
+          path: '/case/fix',
+          meta: {
+            title: '案件釐正',
+          },
+        },
+        {
+          hidden: false,
+          path: '/case/online',
+          meta: {
+            title: '線上申辦案件',
+          },
+        },
+      ],
     },
     {
       hidden: false,
-      path: 'todo',
+      path: '/search',
       meta: {
         title: '綜合查詢',
-        icon: 'el-icon-search'
-      }
+        icon: 'el-icon-search',
+      },
+      children: [
+        {
+          hidden: false,
+          path: '/search/investors',
+          meta: {
+            title: '投資人查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/agents',
+          meta: {
+            title: '代理人查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/business',
+          meta: {
+            title: '投資事業查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/cases',
+          meta: {
+            title: '案件查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/chinese',
+          meta: {
+            title: '陸資黨政軍資料查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/warnings',
+          meta: {
+            title: '警示資料查詢',
+          },
+        },
+        {
+          hidden: false,
+          path: '/search/companies',
+          meta: {
+            title: '公司資料查詢',
+          },
+        },
+      ],
     },
     {
       hidden: false,
-      path: 'todo',
+      path: '/report',
       meta: {
         title: '報表列印',
-        icon: 'el-icon-printer'
-      }
+        icon: 'el-icon-printer',
+      },
+      children: [
+        {
+          hidden: false,
+          path: '/report/cases',
+          meta: {
+            title: '投資案件報表',
+          },
+        },
+        {
+          hidden: false,
+          path: '/report/investors',
+          meta: {
+            title: '投資人報表',
+          },
+        },
+      ],
     },
     {
-      hidden: false,
-      path: 'todo',
+      hidden: true,
+      path: '/code',
       meta: {
         title: '代碼維護',
-        icon: 'el-icon-tickers'
-      }
+        icon: 'el-icon-tickets',
+      },
+      children: [
+        {
+          hidden: false,
+          path: '/code/apply-event',
+          meta: {
+            title: '申請事項代碼維護',
+          },
+        },
+        {
+          hidden: false,
+          path: '/code/implement-period',
+          meta: {
+            title: '實行期間代碼維護',
+          },
+        },
+        {
+          hidden: false,
+          path: '/code/reply',
+          meta: {
+            title: '回函方式代碼維護',
+          },
+        },
+        {
+          hidden: false,
+          path: '/code/investors',
+          meta: {
+            title: '投資人稱謂代碼維護',
+          },
+        },
+      ],
     },
     {
-      hidden: false,
-      path: 'todo',
+      hidden: true,
+      path: '/data',
       meta: {
         title: '資料維護',
-        icon: 'el-icon-set-up'
-      }
-    }
-  ]
+        icon: 'el-icon-set-up',
+      },
+      children: [
+        {
+          hidden: false,
+          path: '/data/investors-stock',
+          meta: {
+            title: '投資人持股釐正作業',
+          },
+        },
+        {
+          hidden: false,
+          path: '/data/investors-merge',
+          meta: {
+            title: '投資人合併作業',
+          },
+        },
+        {
+          hidden: false,
+          path: '/data/add-documents',
+          meta: {
+            title: '補件登錄管理',
+          },
+        },
+      ],
+    },
+  ],
 };
 
 const checkLogin = (flag: boolean) => {
@@ -78,7 +215,7 @@ const logout = () => {
   return new Res('success');
 };
 
-export default function(server: any) {
+export default function (server: Server): void {
   server.post(API.LOGIN, (schema: any, request: any) => {
     const data = JSON.parse(request.requestBody);
     console.log('data', data);

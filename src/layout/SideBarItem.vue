@@ -1,12 +1,12 @@
 <template>
   <template v-if="hasOnlyChild(item) &&(!childItem.children || childItem.noChild)">
-    <page-link v-if="childItem.meta"
-               :to="resolvePath(childItem.path)">
-      <el-menu-item :index="resolvePath(childItem.path)">
-        <i :class="childItem.meta.icon ? childItem.meta.icon : ''"></i>
-        <span class="title">{{ childItem.meta.title }}</span>
-      </el-menu-item>
-    </page-link>
+    <el-menu-item v-if="childItem.meta"
+                  class="childItem"
+                  :index="resolvePath(childItem.path)"
+                  :route="resolvePath(childItem.path)">
+      <i :class="childItem.meta.icon ? childItem.meta.icon : ''"></i>
+      <span class="title">{{ childItem.meta.title }}</span>
+    </el-menu-item>
   </template>
   <el-submenu v-else
               :index="resolvePath(item.path)">
@@ -22,6 +22,9 @@
 </template>
 
 <style lang="scss" scoped>
+.childItem {
+  padding-left: 50px !important;
+}
 .small-style {
   .title,
   .el-submenu__icon-arrow {
@@ -34,13 +37,9 @@
 import { defineComponent, reactive, ref } from 'vue';
 import path from 'path';
 import { isAbsolutePath } from '@/utils/validate';
-import PageLink from '@/components/PageLink.vue';
 
 export default defineComponent({
   name: 'SidebarItem',
-  components: {
-    PageLink,
-  },
   props: {
     data: {
       type: Object,

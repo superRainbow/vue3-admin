@@ -24,7 +24,7 @@
 
   :deep(aside) {
     width: var(--sideBar-width);
-    height: calc(100% - var(--header-height));
+    height: 100%;
     background-color: $sideBar-bg;
     transition: width 0.3s;
 
@@ -36,7 +36,7 @@
   & > :deep(main) {
     width: calc(100% - var(--sideBar-width));
     margin-left: var(--sideBar-width);
-    padding: $spacing-40;
+    padding: $spacing-40 $spacing-55;
     transition: all 0.3s;
 
     @at-root .small-style & {
