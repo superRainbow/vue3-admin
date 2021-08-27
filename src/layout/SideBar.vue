@@ -63,7 +63,7 @@ aside {
 </style>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import { MENU_SETTING } from '@/utils/constants';
@@ -75,6 +75,10 @@ export default defineComponent({
     const route = useRoute();
     const store = useStore();
     const activeMenu = ref(route.path);
+
+    watch(route, () => {
+      activeMenu.value = route.path;
+    });
 
     return {
       MENU_SETTING,
