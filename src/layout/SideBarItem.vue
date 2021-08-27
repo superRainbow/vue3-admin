@@ -8,8 +8,8 @@
       <span class="title">{{ childItem.meta.title }}</span>
     </el-menu-item>
   </template>
-  <el-submenu v-else
-              :index="resolvePath(item.path)">
+  <el-sub-menu v-else
+               :index="resolvePath(item.path)">
     <template #title>
       <i :class="item.meta.icon"></i>
       <span class="title">{{ item.meta.title }}</span>
@@ -18,7 +18,7 @@
                   :key="child.path"
                   :data="child"
                   :url="resolvePath(child.path)" />
-  </el-submenu>
+  </el-sub-menu>
 </template>
 
 <style lang="scss" scoped>
