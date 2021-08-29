@@ -8,7 +8,7 @@
     新增
   </el-button>
   <el-table :data="data"
-            :default-sort="{prop: 'id', order: 'title'}"
+            :default-sort="{prop: 'title', order: 'ascending'}"
             stripe
             highlight-current-row
             style="width: 100%">
