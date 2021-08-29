@@ -1,24 +1,25 @@
 <template>
   <template v-if="hasOnlyChild(item) &&(!childItem.children || childItem.noChild)">
     <el-menu-item v-if="childItem.meta"
-                  class="childItem"
+                  :class="itemLevel !== 1 ? 'childItem': ''"
                   :index="resolvePath(childItem.path)"
                   :route="resolvePath(childItem.path)">
       <i :class="childItem.meta.icon ? childItem.meta.icon : ''"></i>
       <span class="title">{{ childItem.meta.title }}</span>
     </el-menu-item>
   </template>
-  <el-submenu v-else
-              :index="resolvePath(item.path)">
+  <el-sub-menu v-else
+               :index="resolvePath(item.path)">
     <template #title>
       <i :class="item.meta.icon"></i>
       <span class="title">{{ item.meta.title }}</span>
     </template>
     <sidebar-item v-for="child in item.children"
+                  :level="2"
                   :key="child.path"
                   :data="child"
                   :url="resolvePath(child.path)" />
-  </el-submenu>
+  </el-sub-menu>
 </template>
 
 <style lang="scss" scoped>
@@ -41,6 +42,10 @@ import { isAbsolutePath } from '@/utils/validate';
 export default defineComponent({
   name: 'SidebarItem',
   props: {
+    level: {
+      type: Number,
+      default: 1,
+    },
     data: {
       type: Object,
       required: true,
@@ -51,6 +56,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const itemLevel = ref(props.level);
     const basePath = ref(props.url);
     const item = reactive(props.data);
     const childItem = ref({});
@@ -82,6 +88,7 @@ export default defineComponent({
     };
 
     return {
+      itemLevel,
       item,
       basePath,
       childItem,
