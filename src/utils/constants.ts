@@ -17,4 +17,23 @@ const API_CODE = {
   STRUCTURE_ERROR: 400,
 };
 
-export { WEB_TITLE, MENU_SETTING, LOGIN_DATA, API_CODE };
+const HANDLE_STATUS = [
+  {
+    name: '待審中',
+    value: 0,
+  },
+  {
+    name: '補件中',
+    value: 1,
+  },
+  {
+    name: '審查中',
+    value: 2,
+  },
+  {
+    name: '送審',
+    value: 3,
+  },
+];
+
+export { WEB_TITLE, MENU_SETTING, LOGIN_DATA, API_CODE, HANDLE_STATUS };

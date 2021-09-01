@@ -25,21 +25,21 @@ const data = {
       children: [
         {
           hidden: false,
-          path: '/case/handle',
+          path: '/case-handle',
           meta: {
             title: '案件辦理',
           },
         },
         {
           hidden: false,
-          path: '/case/fix',
+          path: '/case-fix',
           meta: {
             title: '案件釐正',
           },
         },
         {
           hidden: false,
-          path: '/case/online',
+          path: '/case-online',
           meta: {
             title: '線上申辦案件',
           },
