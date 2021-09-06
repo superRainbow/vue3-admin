@@ -1,5 +1,6 @@
 import TodoList from '@/views/Todo/list.vue';
 import CaseHandleList from '@/views/CaseHandle';
+import CaseReport from '@/views/CaseReport';
 
 export default [
   {
@@ -62,5 +63,10 @@ export default [
     path: '/case-online',
     name: 'case-online',
     component: TodoList,
+  },
+  {
+    path: 'report/report-cases',
+    name: 'report-cases',
+    component: CaseReport,
   },
 ];
