@@ -56,49 +56,49 @@ const data = {
       children: [
         {
           hidden: false,
-          path: '/search/investors',
+          path: '/search-investors',
           meta: {
             title: '投資人查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/agents',
+          path: '/search-agents',
           meta: {
             title: '代理人查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/business',
+          path: '/search-business',
           meta: {
             title: '投資事業查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/cases',
+          path: '/search-cases',
           meta: {
             title: '案件查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/chinese',
+          path: '/search-china',
           meta: {
             title: '陸資黨政軍資料查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/warnings',
+          path: '/search-warnings',
           meta: {
             title: '警示資料查詢',
           },
         },
         {
           hidden: false,
-          path: '/search/companies',
+          path: '/search-companies',
           meta: {
             title: '公司資料查詢',
           },
@@ -115,14 +115,14 @@ const data = {
       children: [
         {
           hidden: false,
-          path: '/report/cases',
+          path: '/report-cases',
           meta: {
             title: '投資案件報表',
           },
         },
         {
           hidden: false,
-          path: '/report/investors',
+          path: '/report-investors',
           meta: {
             title: '投資人報表',
           },
