@@ -3,15 +3,13 @@
                 :prop="propName">
     <el-col :span="11">
       <DatePickerTaiwan v-model="value[0]"
-                        :config="datepickerSetting"
-                        @blur="blurEvent" />
+                        :config="datepickerSetting" />
     </el-col>
     <el-col class="line"
             :span="2"> - </el-col>
     <el-col :span="11">
       <DatePickerTaiwan v-model="value[1]"
-                        :config="datepickerSetting"
-                        @blur="blurEvent" />
+                        :config="datepickerSetting" />
     </el-col>
   </el-form-item>
 </template>
@@ -57,19 +55,14 @@ export default defineComponent({
     const value = ref(props.modelValue);
 
     watchEffect(() => {
-      console.log(value.value);
-    });
-
-    const blurEvent = () => {
       context.emit('update:modelValue', value);
-    };
+    });
 
     return {
       propName: props.prop,
       labelName: props.label,
       datepickerSetting: props.config,
       value,
-      blurEvent,
     };
   },
 });
