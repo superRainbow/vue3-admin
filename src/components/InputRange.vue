@@ -4,7 +4,6 @@
     <el-col :span="11">
       <el-input v-model="value[0]"
                 :type="propName"
-                @blur="blurEvent"
                 placeholder="請選擇"></el-input>
     </el-col>
     <el-col class="line"
@@ -12,7 +11,6 @@
     <el-col :span="11">
       <el-input v-model="value[1]"
                 :type="propName"
-                @blur="blurEvent"
                 placeholder="請選擇"></el-input>
     </el-col>
   </el-form-item>
@@ -49,18 +47,13 @@ export default defineComponent({
     const value = ref(props.modelValue);
 
     watchEffect(() => {
-      console.log(value.value);
-    });
-
-    const blurEvent = () => {
       context.emit('update:modelValue', value);
-    };
+    });
 
     return {
       propName: props.prop,
       labelName: props.label,
       value,
-      blurEvent,
     };
   },
 });

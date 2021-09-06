@@ -30,7 +30,7 @@ export interface DateBlock {
 }
 
 export interface ComponentSetting {
-  name: string;
+  type: string;
   placeholder: string;
   autocomplete: string;
   disabled: boolean;

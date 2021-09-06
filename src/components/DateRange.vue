@@ -61,7 +61,7 @@ export default defineComponent({
     return {
       propName: props.prop,
       labelName: props.label,
-      datepickerSetting: props.config,
+      datepickerSetting: { ...props.config, type: props.prop },
       value,
     };
   },

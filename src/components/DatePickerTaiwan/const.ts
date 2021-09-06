@@ -1,5 +1,5 @@
 export const settingDefault = {
-  name: 'date',
+  type: 'date',
   placeholder: '請輸入',
   autocomplete: 'off',
   disabled: false,

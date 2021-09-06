@@ -1,5 +1,5 @@
 <template>
-  <el-input :name="setting.name"
+  <el-input :type="setting.type"
             :placeholder="setting.placeholder"
             suffix-icon="el-icon-date"
             :autocomplete="setting.autocomplete"
@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, computed, watch } from 'vue';
+import { defineComponent, ref, reactive, computed, watch, watchEffect } from 'vue';
 import _ from 'lodash';
 import dayjs from 'dayjs';
 import { FormatSettingObject, DateBlock, ComponentSetting } from '@/components/DatePickerTaiwan/interface';
@@ -197,6 +197,9 @@ export default defineComponent({
       }),
     });
 
+    watchEffect(() => {
+      selectedValue.value = props.modelValue;
+    });
     watch(
       () => datepicker.show,
       (state) => {
@@ -213,8 +216,6 @@ export default defineComponent({
       () => selectedValue.value,
       (value, prevValue) => {
         errorStyle.value = !value || twRegexp.test(value) || yyyymmddRegexp.test(value) ? false : true;
-        // emit('validate', errorStyle);
-        // console.log('value, prevValue', value, prevValue, errorStyle.value);
         if (value === '' || (value !== prevValue && formatSetting.formatRegexp.test(value))) {
           selectedValue.value = formatDate(value, setting.isTwType, setting.locale.format);
           emit('update:modelValue', formatDate(value));
