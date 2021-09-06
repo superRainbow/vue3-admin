@@ -1,6 +1,6 @@
 import { isJson } from '@/utils/validate';
 
-export function setLocalStorage(setName: string, data: string | object) {
+export function setLocalStorage(setName: string, data: string | any) {
   localStorage.setItem(setName, typeof data === 'object' ? JSON.stringify(data) : data);
 }
 

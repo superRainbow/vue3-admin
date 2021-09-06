@@ -5,12 +5,13 @@ import Login from '@/views/Login';
 import Home from '@/views/Home';
 import PageNotFound from '@/views/PageNotFound';
 import TodoList from '@/views/Todo/list.vue';
+import CaseReport from '@/views/CaseReport';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
   },
   {
     path: '/',
@@ -21,21 +22,26 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'home',
         name: 'home',
-        component: Home
+        component: Home,
       },
       {
         path: 'todo',
         name: 'todo',
-        component: TodoList
+        component: TodoList,
       },
-      { path: '/:pathMatch(.*)*', component: PageNotFound }
-    ]
-  }
+      {
+        path: 'report/report/cases',
+        name: 'caseReport',
+        component: CaseReport,
+      },
+      { path: '/:pathMatch(.*)*', component: PageNotFound },
+    ],
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 
 // router 守門員：當非 login 頁面會去檢查是否有 accessToken，沒有就導到登入頁
