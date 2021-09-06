@@ -1,8 +1,14 @@
 $--font-path: '~element-plus/theme-chalk/fonts';
 
 $white: #ffffff;
+$black: #000;
 $bg-gary: #f0f3f4;
+$bg-mask: #ffffff00;
+$bg-date-hover: #b1dcfb;
+$bg-date-active: #0089ec;
 $text-color: #606266;
+$border-color: #dcdfe6;
+$date-disabled-color: #ddd;
 
 $sideBar-width: 200;
 $sideBar-small-width: 65;
@@ -12,14 +18,15 @@ $header-height: 60;
 $header-border: #454b61;
 $light-grey: #ebeef5;
 
+$spacing-10: 10px;
 $spacing-15: 15px;
 $spacing-20: 20px;
 $spacing-40: 40px;
 $spacing-55: 55px;
 
 $zIndex-header: 999;
-
-$avatar-size: 60px;
+$zIndex-date-mask: 1000;
+$zIndex-date-picker: 1001;
 
 %width-height {
   width: 100%;
