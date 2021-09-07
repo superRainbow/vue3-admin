@@ -4,8 +4,8 @@ const API = {
   REGISTER: '/Auth/Register',
   REFRESH_TOKEN: '/Auth/RefreshToken',
   TODO: '/Todo',
-  SEARCH_CASE_REPORT: '/Report/Case/Search',
-  PRINT_CASE_REPORT: '/Report/Case/Print',
+  REPORT_CASE_SEARCH: '/Report/Case/Search',
+  REPORT_CASE_PRINT: '/Report/Case/Print',
 };
 
 export default API;

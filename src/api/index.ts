@@ -1,6 +1,6 @@
 import { postRegister, postLogin, getLogout, postRefreshToken } from './modules/auth';
 import { getTodoList, getTodoItem, postTodoItem, putTodoItem, deleteTodoItem } from './modules/todo';
-import { postSearchingCases, postPrintingCases } from './modules/caseReport';
+import { postSearchingCases, postPrintingCases } from './modules/reportCases';
 
 export const apiPostRegister = postRegister;
 export const apiPostLogin = postLogin;

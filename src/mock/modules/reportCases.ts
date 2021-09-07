@@ -35,13 +35,13 @@ const sampleData = [
 ];
 
 export default function (server: Server): void {
-  server.post(API.SEARCH_CASE_REPORT, (schema: any, request: any) => {
+  server.post(API.REPORT_CASE_SEARCH, (schema: any, request: any) => {
     const keyWords = JSON.parse(request.requestBody).reqBody.data;
     const resultTable = _.filter(sampleData, keyWords);
     return new Res('success', resultTable);
   });
 
-  server.post(API.PRINT_CASE_REPORT, (schema: any, request: any) => {
+  server.post(API.REPORT_CASE_PRINT, (schema: any, request: any) => {
     const checkedCases = JSON.parse(request.requestBody).reqBody.data;
     //[TD]列印是要接什檔案回來？
     return new Res('success');

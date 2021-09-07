@@ -37,7 +37,7 @@
             :default-sort="{prop: 'number', order: 'ascending'}"
             stripe
             highlight-current-row
-            height="385">
+            style="width: 100%">
     <el-table-column type="selection">
     </el-table-column>
     <el-table-column v-for="(colum) in columnArray"
@@ -74,12 +74,13 @@ export default defineComponent({
     const form = reactive({ number: '', business: '', investor: '' });
     const hasValueForSearch = computed(() => !(form.number === '' && form.business === '' && form.investor === ''));
 
+    //設定width長度，反而造成欄位無法隨著螢幕寬度彈性改變
     const columnArray = [
       { prop: 'number', label: '案號', width: '100' },
-      { prop: 'business', label: '事業名稱', width: '375' },
-      { prop: 'investor', label: '投資人', width: '100' },
-      { prop: 'investmentAmount', label: '投資金額', width: '175' },
-      { prop: 'approvedAmount', label: '審定金額', width: '175' },
+      { prop: 'business', label: '事業名稱' },
+      { prop: 'investor', label: '投資人' },
+      { prop: 'investmentAmount', label: '投資金額' },
+      { prop: 'approvedAmount', label: '審定金額' },
     ];
 
     const checkInput = (rule: { [key: string]: string }, value: string, callback: any) => {
@@ -99,7 +100,7 @@ export default defineComponent({
     };
 
     //[TD]實作API、store、mock
-    // const tableData = computed(() => store.getters['caseReport/cases']);
+    // const tableData = computed(() => store.getters['reportCases/cases']);
     const tableData = [
       {
         number: 245103,
@@ -137,7 +138,7 @@ export default defineComponent({
       //[TD](1)將要搜尋的選項帶入，(2)得到的結果要存store
       if (formValidate()) {
         console.log('search!');
-        // store.dispatch('caseReport/searchCases');
+        // store.dispatch('reportCases/searchCases');
       } else {
         console.log('no value!');
       }
@@ -146,7 +147,7 @@ export default defineComponent({
     const print = () => {
       //[TD](1)取得勾選的cases，(2)將選取的cases執行列印的動作
       console.log('Print!');
-      // store.dispatch('caseReport/printReports');
+      // store.dispatch('reportCases/printReports');
     };
 
     return {
