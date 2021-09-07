@@ -4,6 +4,7 @@ import Home from '@/views/Home';
 import UserData from '@/views/UserData';
 import PageNotFound from '@/views/PageNotFound';
 import caseModule from './case';
+import reportModule from './report';
 
 export default [
   {
@@ -28,6 +29,7 @@ export default [
         component: UserData,
       },
       ...caseModule,
+      ...reportModule,
       { path: '/:pathMatch(.*)*', component: PageNotFound },
     ],
   },

@@ -17,8 +17,8 @@ const showErrorMessage = (error: { [key: string]: any }) => {
       message: error.message || '發生錯誤',
       confirmCallback: () => {
         return error.callback ? error.callback() : '';
-      }
-    }
+      },
+    },
   });
 };
 
@@ -32,13 +32,13 @@ const logoutAction = () => {
     callback: () => {
       store.dispatch('logout');
       clearCallAPI();
-    }
+    },
   };
 
   showErrorMessage(errorData);
 };
 
-const otherErrorAction = (res: object) => {
+const otherErrorAction = (res: { [key: string]: any }) => {
   clearCallAPI();
   showErrorMessage(res);
   return Promise.reject(res);
@@ -68,11 +68,11 @@ const handleResAction = (res: { [key: string]: any }) => {
 const generateReqData = (data: any, method: any) => {
   return {
     reqHeader: {
-      txnId: isPostOrPut(method) ? uuidv4() : ''
+      txnId: isPostOrPut(method) ? uuidv4() : '',
     },
     reqBody: {
-      data
-    }
+      data,
+    },
   };
 };
 
@@ -82,36 +82,36 @@ const formatResData = (res: { [key: string]: any }) => {
     status: res.status,
     returnCode: res.data.respHeader.status,
     message: res.data.respHeader.message,
-    data: res.data.respBody?.data
+    data: res.data.respBody?.data,
   };
 };
 
 const http = axios.create({
-  baseURL: `${process.env.VUE_APP_API_URL}`
+  baseURL: `${process.env.VUE_APP_API_URL}`,
 });
 
 // 處理發起請求前
 http.interceptors.request.use(
-  config => {
+  (config) => {
     console.log('請求發起前', config);
     config.headers.common['Authorization'] = `Bearer ${getLocalStorage('accessToken')}`;
     config.data = generateReqData(config.data, config.method);
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
   }
 );
 
 // 處理回傳資料
 http.interceptors.response.use(
-  response => {
+  (response) => {
     console.log('回傳資料', response);
     const res = formatResData(response);
     console.log('formatResData', res);
     return handleResAction(res);
   },
-  error => {
+  (error) => {
     console.log('error response', error.response);
     const res = formatResData(error.response);
     return handleResAction(res);
