@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { TwStartYear } from '@/components/DatePickerTaiwan/const';
+import { TW_START_YEAR } from '@/utils/constants';
 
-export const getTwYear = (year: number): number => year - TwStartYear;
+export const getTwYear = (year: number): number => year - TW_START_YEAR;
 export const formatDate = (date: Date | string, showTwFormat?: boolean, format = ''): string => {
   if (date) {
     const twDate = `${getTwYear(dayjs(date).year())}/${dayjs(date).month() + 1}/${dayjs(date).date()}`;
@@ -11,5 +11,5 @@ export const formatDate = (date: Date | string, showTwFormat?: boolean, format =
 };
 export const yyyymmddFormat = (string: string): string => {
   const array = string.split('/');
-  return `${parseInt(array[0]) + TwStartYear}/${array[1]}/${array[2]}`;
+  return `${parseInt(array[0]) + TW_START_YEAR}/${array[1]}/${array[2]}`;
 };

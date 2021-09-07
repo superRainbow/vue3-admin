@@ -1,4 +1,5 @@
 const WEB_TITLE = '僑外陸投資審議管理資訊系統';
+const TW_START_YEAR = 1911;
 const MENU_SETTING = {
   BG: '#3a3f51',
   TEXT: '#b5b6bd',
@@ -36,4 +37,4 @@ const HANDLE_STATUS = [
   },
 ];
 
-export { WEB_TITLE, MENU_SETTING, LOGIN_DATA, API_CODE, HANDLE_STATUS };
+export { WEB_TITLE, TW_START_YEAR, MENU_SETTING, LOGIN_DATA, API_CODE, HANDLE_STATUS };

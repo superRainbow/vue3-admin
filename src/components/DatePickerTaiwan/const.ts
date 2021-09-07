@@ -19,6 +19,5 @@ export const settingDefault = {
     slashOffset: [5, 8, 11],
   },
 };
-export const TwStartYear = 1911;
 export const yyyymmddRegexp = new RegExp('^\\d{4}[\\-/\\.](0?[1-9]|1[012])[\\-/\\.](0?[1-9]|[12][0-9]|3[01])$');
 export const twRegexp = new RegExp('^\\d{2,3}[\\-/\\.](0?[1-9]|1[012])[\\-/\\.](0?[1-9]|[12][0-9]|3[01])$');

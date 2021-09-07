@@ -90,7 +90,7 @@ import _ from 'lodash';
 import dayjs from 'dayjs';
 import { FormatSettingObject, DateBlock, ComponentSetting } from '@/components/DatePickerTaiwan/interface';
 import { settingDefault, yyyymmddRegexp, twRegexp } from '@/components/DatePickerTaiwan/const';
-import { getTwYear, formatDate, yyyymmddFormat } from '@/components/DatePickerTaiwan/fn';
+import { getTwYear, formatDate, yyyymmddFormat } from '@/utils/date';
 
 export default defineComponent({
   name: 'date-picker-taiwan',
