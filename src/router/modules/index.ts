@@ -3,7 +3,7 @@ import Login from '@/views/Login';
 import Home from '@/views/Home';
 import UserData from '@/views/UserData';
 import PageNotFound from '@/views/PageNotFound';
-import caseModule from './case';
+import caseModule from './caseHandle';
 
 export default [
   {

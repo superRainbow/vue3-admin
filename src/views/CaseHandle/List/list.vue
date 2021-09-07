@@ -8,24 +8,10 @@
       <InputRange label="收文文號區間"
                   prop="documentID"
                   v-model="searchForm.documentID" />
-      <el-form-item label="日期"
-                    prop="date1">
-        <DatePickerTaiwan v-model="searchForm.date1"
-                          :config="datepickerSetting" />
-      </el-form-item>
-      <el-form-item label="日期"
-                    prop="date2">
-        <DatePickerTaiwan v-model="searchForm.date2"
-                          :config="{...datepickerSetting, isTwType: true }" />
-      </el-form-item>
       <DateRange label="日期區間"
-                 prop="dateRange1"
-                 v-model="searchForm.dateRange1"
+                 prop="dateRange"
+                 v-model="searchForm.dateRange"
                  :config="dateRangeSetting" />
-      <DateRange label="日期區間"
-                 prop="dateRange2"
-                 v-model="searchForm.dateRange2"
-                 :config="{...dateRangeSetting, isTwType: true}" />
       <el-form-item label="處理狀態"
                     prop="status">
         <el-select class="style-block"
@@ -46,29 +32,41 @@
       </el-form-item>
     </el-form>
   </section>
-  <el-table :data="data"
-            :default-sort="{prop: 'id', order: 'title'}"
-            stripe
-            highlight-current-row
-            style="width: 100%">
-    <el-table-column v-for="(colum) in columnArray"
-                     :key="colum.id"
-                     :prop="colum.prop"
-                     :label="colum.label"
-                     :sortable="(colum.prop === 'title') ? true : false"
-                     :width="colum.width">
-    </el-table-column>
-    <el-table-column label="功能"
-                     align="center">
-      <template #default="scope">
-        <el-button @click.prevent="putItem(scope.$index)"
-                   type="success"
-                   size="small">
-          案件辦理
-        </el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <section class="resultSection">
+    <el-table :data="data"
+              :default-sort="{prop: 'id', order: 'title'}"
+              stripe
+              highlight-current-row
+              style="width: 100%">
+      <el-table-column v-for="colum in columnArray"
+                       :key="colum.id"
+                       :prop="colum.prop"
+                       :label="colum.label"
+                       :default-sort="{prop: 'date', order: 'descending'}"
+                       :sortable="(colum.prop === 'date' || colum.prop === 'id') ? true : false"
+                       :width="colum.width">
+      </el-table-column>
+      <el-table-column label="功能"
+                       align="center">
+        <template #default="scope">
+          <el-button @click.prevent="editCase(scope.$index)"
+                     type="success"
+                     size="small">
+            案件辦理
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination v-if="pagination.totalNum"
+                   layout="prev, pager, next"
+                   hide-on-single-page
+                   background
+                   small
+                   :page-size="pagination.numPerPage"
+                   :current-page="pagination.curPageNum"
+                   @current-change="handleCurrentChange"
+                   :total="pagination.totalNum"></el-pagination>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -81,69 +79,68 @@ h1 {
 .searchSection {
   display: flex;
   justify-content: center;
-  margin-bottom: $spacing-40;
   padding: $spacing-20;
   border: solid 1px $light-grey;
   background: $white;
   .el-form {
     width: 500px;
   }
+  .style-block {
+    display: block;
+  }
 }
-.style-block {
-  display: block;
+
+.resultSection {
+  padding: $spacing-40 0;
+  text-align: center;
+  .el-pagination {
+    margin-top: $spacing-15;
+  }
 }
 </style>
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, computed, ref } from 'vue';
+import router from '@/router';
 import { useStore } from 'vuex';
 import { HANDLE_STATUS } from '@/utils/constants';
 import InputRange from '@/components/InputRange.vue';
 import DateRange from '@/components/DateRange.vue';
-import DatePickerTaiwan from '@/components/DatePickerTaiwan';
 
 export default defineComponent({
   components: {
     InputRange,
-    DatePickerTaiwan,
     DateRange,
   },
   setup() {
-    const datepickerSetting = {
-      name: 'date',
-      isTwType: false,
-    };
+    const store = useStore();
+    const searchFormRef = ref();
+    const data = computed(() => store.getters['caseHandle/list']);
+    const pagination = computed(() => store.getters['caseHandle/pagination']);
+
     const dateRangeSetting = {
-      isTwType: false,
+      isTwType: true,
     };
     const searchForm = ref({
       documentID: ['', ''],
-      date1: '2021-09-07T00:00:00+08:00',
-      date2: '2021-09-07T00:00:00+08:00',
-      dateRange1: ['2021-09-07T00:00:00+08:00', '2021-11-10T00:00:00+08:00'],
-      dateRange2: ['2021-09-07T00:00:00+08:00', '2021-11-10T00:00:00+08:00'],
+      dateRange: ['', ''],
       status: '',
     });
-    const searchFormRef = ref();
 
-    const store = useStore();
     const columnArray = [
-      { prop: 'title', label: '標題', width: '250' },
-      { prop: 'description', label: '描述', width: '350' },
-      { prop: 'doneString', label: '完成狀態', width: '150' },
+      { prop: 'id', label: '文號', width: '250' },
+      { prop: 'subject', label: '主旨', width: '550' },
+      { prop: 'date', label: '日期', width: '150' },
+      { prop: 'status', label: '處理狀態', width: '150' },
     ];
-    const data = computed(() => store.getters['todo/list']);
 
     onBeforeMount(() => {
-      store.dispatch('todo/getList');
+      store.dispatch('caseHandle/getList');
     });
 
-    const putItem = (id: number) => {
-      console.log('putItem', id);
-    };
-
-    const validateDatePicker = (flag: boolean) => {
-      console.log('validateDatePicker', flag);
+    const editCase = (id: number) => {
+      const caseId = data.value[id].id;
+      router.push({ path: `/case-handle/${caseId}` });
     };
 
     const resetForm = () => {
@@ -154,18 +151,22 @@ export default defineComponent({
       console.table(searchForm.value);
     };
 
+    const handleCurrentChange = (index: number) => {
+      console.log('handleCurrentChange', index);
+    };
+
     return {
-      datepickerSetting,
       dateRangeSetting,
       HANDLE_STATUS,
       searchFormRef,
       searchForm,
-      validateDatePicker,
-      resetForm,
-      submitForm,
       columnArray,
       data,
-      putItem,
+      pagination,
+      resetForm,
+      submitForm,
+      editCase,
+      handleCurrentChange,
     };
   },
 });
