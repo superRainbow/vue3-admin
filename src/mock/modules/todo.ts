@@ -1,5 +1,5 @@
 import { Server } from 'miragejs';
-import { Res } from '../helper';
+import { Res } from '@/mock/helper';
 import API from '@/utils/api';
 import { getLocalStorage } from '@/utils/localStorage';
 
