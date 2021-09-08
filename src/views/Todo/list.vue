@@ -8,7 +8,7 @@
     新增
   </el-button>
   <el-table :data="data"
-            :default-sort="{prop: 'id', order: 'title'}"
+            :default-sort="{prop: 'title', order: 'ascending'}"
             stripe
             highlight-current-row
             style="width: 100%">
@@ -22,13 +22,13 @@
     <el-table-column label="功能"
                      align="center">
       <template #default="scope">
-        <el-button @click.prevent="putItem(scope.$index)"
+        <el-button @click.prevent="putItem(scope.row)"
                    type="info"
                    size="small"
                    plain>
           編輯
         </el-button>
-        <el-button @click.prevent="deleteItem(scope.$index)"
+        <el-button @click.prevent="deleteItem(scope.row)"
                    type="danger"
                    size="small"
                    plain>
@@ -83,20 +83,22 @@ export default defineComponent({
       });
     };
 
-    const putItem = (id: number) => {
+    const putItem = (row: { [key: string]: any }) => {
+      const itemData = data.value.find((item: { [key: string]: any }) => item.id == row.id);
       store.dispatch('todo/toggleModal', {
         flag: true,
         config: { type: 'edit' },
-        data: { ...data.value[id] },
+        data: { ...itemData },
       });
     };
 
-    const deleteItem = (id: number) => {
+    const deleteItem = (row: { [key: string]: any }) => {
+      const itemData = data.value.find((item: { [key: string]: any }) => item.id == row.id);
       const config = {
         title: '確定要刪除嗎？',
-        message: `確定要刪除：${data.value[id].title}`,
+        message: `確定要刪除：${itemData.title}`,
         confirmCallback: () => {
-          store.dispatch('todo/deleteItem', data.value[id].id);
+          store.dispatch('todo/deleteItem', itemData.id);
         },
       };
       store.dispatch('toggleDialog', {

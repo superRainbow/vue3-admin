@@ -3,7 +3,7 @@ import { Res } from '@/mock/helper';
 import API from '@/utils/api';
 import { getLocalStorage } from '@/utils/localStorage';
 
-const data = [
+let data = [
   {
     id: 1,
     title: 'Test1',
@@ -40,7 +40,9 @@ export default function (server: Server): void {
 
   server.post(API.TODO, (schema: any, request: any) => {
     const item = JSON.parse(request.requestBody).reqBody.data;
-    return new Res('success', { id: data.length + 1, ...item });
+    const newItem = { id: data.length + 1, ...item };
+    data = [...data, newItem];
+    return new Res('success', newItem);
   });
 
   server.get(`${API.TODO}/:id`, (schema: any, request: any) => {
@@ -49,11 +51,13 @@ export default function (server: Server): void {
   });
 
   server.put(`${API.TODO}/:id`, (schema: any, request: any) => {
-    const data = JSON.parse(request.requestBody);
-    return new Res('success', data);
+    const putItem = JSON.parse(request.requestBody);
+    data = data.map((item: { [key: string]: any }) => (item = item.id === putItem.id ? putItem : item));
+    return new Res('success', putItem);
   });
 
-  server.delete(`${API.TODO}/:id`, () => {
+  server.delete(`${API.TODO}/:id`, (schema: any, request: any) => {
+    data = data.filter((item: { [key: string]: any }) => item.id !== request.params.id);
     return new Res('success');
   });
 }
