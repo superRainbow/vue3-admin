@@ -3,7 +3,8 @@ const API = {
   LOGOUT: '/Auth/Logout',
   REGISTER: '/Auth/Register',
   REFRESH_TOKEN: '/Auth/RefreshToken',
-  TODO: '/Todo'
+  TODO: '/Todo',
+  CASE_HANDLE: '/CaseHandle',
 };
 
 export default API;
